@@ -25,21 +25,36 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home.index')->name('home.index');
 Route::view('/contact', 'home.contact')->name('home.contact');
 
-Route::get('/posts/{id}', function ($id) {
-    $posts = [
-        1 => [
-            'title' => 'Introduction to laravel.',
-            'content' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            'is_new' => true,
-            'has_comments' => true,
-        ],
-        2 => [
-            'title' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
-            'content' => ' Quia quas cumque doloremque in repudiandae hic optio laudantium magnam labore architecto tenetur aliquam nulla.',
-            'is_new' => false
-        ],
-    ];
+$posts = [
+    1 => [
+        'title' => 'Introduction to laravel.',
+        'content' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+        'is_new' => true,
+        'has_comments' => true,
+    ],
+    2 => [
+        'title' => 'Amet consectetur, adipisicing elit.',
+        'content' => 'Doloremque in repudiandae hic optio laudantium magnam labore architecto tenetur aliquam nulla.',
+        'is_new' => false
+    ],
+    3 => [
+        'title' => 'Dolor sit amet consectetur.',
+        'content' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+        'is_new' => true,
+        'has_comments' => true,
+    ],
+    4 => [
+        'title' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
+        'content' => 'Quas cumque doloremque in repudiandae hic optio laudantium magnam labore architecto tenetur aliquam nulla.',
+        'is_new' => false
+    ],
+];
 
+Route::get('/posts', function () use ($posts) {
+    return view('posts.index', ['posts' => $posts]);
+});
+
+Route::get('/posts/{id}', function ($id) use ($posts) {
     abort_if(!isset($posts[$id]), 404);
     return view('posts.show', ['posts' => $posts[$id]]);
 })->name('posts.show');
