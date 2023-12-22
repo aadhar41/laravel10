@@ -7,6 +7,9 @@
         <p>{{ $key }} - {{ $post['title'] }}</p>
     @endforeach --}}
 
+    {{-- @each('posts.partials.post', $posts, 'post', 'view.empty') --}}
+    {{-- @each('posts.partials.post', $posts, 'post') --}}
+
     @forelse ($posts as $key => $post)
         @includeIf('posts.partials.post', ['post' => $post])
     @empty

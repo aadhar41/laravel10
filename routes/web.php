@@ -50,6 +50,38 @@ $posts = [
     ],
 ];
 
+Route::prefix('/fun')->name('fun.')->group(function () use ($posts) {
+    Route::get('/responses', function () use ($posts) {
+        return response($posts, 200)
+            ->header('content-type', 'application/json')
+            ->cookie('MY_COOKIE', 'Aadhar gaur', 3600);
+    })->name('responses');
+
+    Route::get('/redirect', function () {
+        return redirect('/contact');
+    })->name('redirect');
+
+    Route::get('/back', function () {
+        return back();
+    })->name('back');
+
+    Route::get('/named-route', function () {
+        return redirect()->route('posts.show', ['id' => 1]);
+    })->name('named-route');
+
+    Route::get('/away', function () {
+        return redirect()->away('https://www.google.com');
+    })->name('away');
+
+    Route::get('/json', function () use ($posts) {
+        return response()->json($posts);
+    })->name('json');
+
+    Route::get('/download', function () use ($posts) {
+        return response()->download(public_path('/daniel.jpg'), 'download.jpg');
+    })->name('download');
+});
+
 Route::get('/posts', function () use ($posts) {
     return view('posts.index', ['posts' => $posts]);
 });
