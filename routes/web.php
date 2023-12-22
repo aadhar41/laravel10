@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,7 +83,9 @@ Route::prefix('/fun')->name('fun.')->group(function () use ($posts) {
     })->name('download');
 });
 
-Route::get('/posts', function () use ($posts) {
+Route::get('/posts', function (Request $request) use ($posts) {
+    // dd(request()->all());
+    dd((int) request()->query('page', 1));
     return view('posts.index', ['posts' => $posts]);
 });
 
