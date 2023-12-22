@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,8 +24,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('home.contact', []);
 // })->name('home.contact');
 
-Route::view('/', 'home.index')->name('home.index');
-Route::view('/contact', 'home.contact')->name('home.contact');
+Route::get('/', [HomeController::class, 'home'])
+    ->name('home.index');
+Route::get('/contact', [HomeController::class, 'contact'])
+    ->name('home.contact');
+// Route::view('/contact', 'home.contact')->name('home.contact');
 
 $posts = [
     1 => [
@@ -96,4 +100,4 @@ Route::get('/posts/{id}', function ($id) use ($posts) {
 
 Route::get('recent-posts/{days_ago?}', function ($daysAgo = 20) {
     return 'Post from ' . $daysAgo . ' days ago.';
-})->name('posts.recent.index');
+})->name('posts.recent.index')->middleware('auth');
