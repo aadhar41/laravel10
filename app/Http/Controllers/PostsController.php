@@ -41,7 +41,6 @@ class PostsController extends Controller
      */
     public function show(string $id)
     {
-        // abort_if(!isset($this->posts[$id]), 404);
         return view('posts.show', ['posts' => BlogPost::findOrFail($id)]);
     }
 
@@ -56,8 +55,14 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StorePost $request, string $id)
     {
+        $post = BlogPost::findOrFail($id);
+        $validated = $request->validated();
+        $post->fill($validated);
+        $post->save();
+        $request->session()->flash('status', 'The blog post updated!');
+        return redirect()->route('posts.show', ['post' => $post->id]);
         //
     }
 
