@@ -6,6 +6,8 @@
         @csrf
         @method('PUT')
         @include('posts.partials.form')
-        <button type="submit" class="btn btn-primary">Update</button>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-block">Update</button>
+        </div>
     </form>
 @endsection
