@@ -1,7 +1,8 @@
 @if ($loop->even)
     <p>{{ $key }} - {{ $post->title }}</p>
 @else
-    <p style="background-color: rgba(0,0,0,0.4); padding: 5px 0; color:white;">{{ $key }} - {{ $post->title }}
+    <p class="lead">
+        {{ $key }} - {{ $post->title }}
     </p>
 @endif
 

@@ -107,3 +107,6 @@ Route::resource('posts', PostsController::class);
 // Route::get('recent-posts/{days_ago?}', function ($daysAgo = 20) {
 //     return 'Post from ' . $daysAgo . ' days ago.';
 // })->name('posts.recent.index')->middleware('auth');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
