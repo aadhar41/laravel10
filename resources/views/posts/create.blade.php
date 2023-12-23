@@ -2,7 +2,8 @@
 @section('title', 'Create Post')
 
 @section('content')
-    <form action="{{route('posts.store')}}" method="POST">
+    <form action="{{ route('posts.store') }}" method="POST">
+        @csrf
         <div class="form-group">
             <label for=""></label>
             <input type="text" name="title" id="title" class="form-control" placeholder="Title"
