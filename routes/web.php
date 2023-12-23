@@ -91,7 +91,7 @@ Route::prefix('/fun')->name('fun.')->group(function () use ($posts) {
     })->name('download');
 });
 
-Route::resource('posts', PostsController::class)->only(['index', 'show', 'create', 'store']);
+Route::resource('posts', PostsController::class)->only(['index', 'show', 'create', 'store', 'edit', 'update']);
 
 // Route::get('/posts', function (Request $request) use ($posts) {
 //     // dd(request()->all());

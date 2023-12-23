@@ -8,30 +8,6 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-    private $posts = [
-        1 => [
-            'title' => 'Introduction to laravel.',
-            'content' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            'is_new' => true,
-            'has_comments' => true,
-        ],
-        2 => [
-            'title' => 'Amet consectetur, adipisicing elit.',
-            'content' => 'Doloremque in repudiandae hic optio laudantium magnam labore architecto tenetur aliquam nulla.',
-            'is_new' => false
-        ],
-        3 => [
-            'title' => 'Dolor sit amet consectetur.',
-            'content' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            'is_new' => true,
-            'has_comments' => true,
-        ],
-        4 => [
-            'title' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
-            'content' => 'Quas cumque doloremque in repudiandae hic optio laudantium magnam labore architecto tenetur aliquam nulla.',
-            'is_new' => false
-        ],
-    ];
 
     /**
      * Display a listing of the resource.
@@ -74,7 +50,7 @@ class PostsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('posts.edit', ['post' => BlogPost::findOrFail($id)]);
     }
 
     /**
