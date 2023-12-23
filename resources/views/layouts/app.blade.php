@@ -10,6 +10,13 @@
 
 <body>
     <div>
+        @if (session('status'))
+            <div class="alert alert-danger"
+                style="background: rgba(150, 0, 0, 0.1); border:1px solid rgba(150, 0, 0, 0.7); color:rgba(150, 0, 0, 0.7); padding: 8px; border-radius: 3px;"
+                role="alert">
+                <strong>{{ session('status') }}</strong>
+            </div>
+        @endif
         @yield('content')
     </div>
 </body>

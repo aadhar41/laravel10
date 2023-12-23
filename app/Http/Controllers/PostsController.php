@@ -59,6 +59,7 @@ class PostsController extends Controller
         $post->title = $validated['title'];
         $post->content = $validated['content'];
         $post->save();
+        $request->session()->flash('status', 'The blog post created!');
         return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
