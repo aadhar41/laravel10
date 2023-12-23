@@ -92,14 +92,16 @@
         <main class="py-4">
             <div class="container">
                 @if (session('status'))
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-success" role="alert">
                         <strong>{{ session('status') }}</strong>
                     </div>
                 @endif
                 @if ($errors->any())
                     <ul class="list-group mb-2">
                         @foreach ($errors->all() as $error)
-                            <li class="list-group-item bg-danger text-light"><strong>{{ $error }}</strong></li>
+                            <li class="list-group-item list-group-item-danger">
+                                <strong>{{ $error }}</strong>
+                            </li>
                         @endforeach
                     </ul>
                 @endif
