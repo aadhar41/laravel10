@@ -15,4 +15,6 @@ class BlogPost extends Model
      * @var string
      */
     protected $table = 'blog_posts';
+
+    protected $fillable = ['title', 'content'];
 }
