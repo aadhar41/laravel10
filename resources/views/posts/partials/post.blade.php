@@ -1,6 +1,12 @@
 <a name="" id="" class="badge text-muted" href="{{ route('posts.show', ['post' => $post->id]) }}"
     role="button">
-    <h3> {{ $post->title }}</h3>
+    <h3>
+        {{ $post->title }}
+        @if (now()->diffInMinutes($post->created_at) < 5)
+            <span class="badge rounded-pill bg-primary mx-2">New !</span>
+        @endif
+    </h3>
+
 </a>
 
 <div class="mb-3">
