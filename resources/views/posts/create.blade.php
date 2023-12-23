@@ -7,6 +7,8 @@
 
         @include('posts.partials.form')
 
-        <button type="submit" class="btn btn-primary">Create</button>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-block">Create</button>
+        </div>
     </form>
 @endsection
