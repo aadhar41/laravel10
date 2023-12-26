@@ -15,6 +15,15 @@ class PostsController extends Controller
      */
     public function index()
     {
+        $posts = BlogPost::withCount(
+            [
+                'comments',
+                'comments as new_comments' =>
+                function ($query) {
+                    $query->where('created_at', '>', '2023-12-24 08:23:37');
+                }
+            ]
+        )->get();
         // DB::connection()->enableQueryLog();
         // $posts = BlogPost::with('comments')->get();
         // foreach ($posts as $post) {
@@ -23,7 +32,12 @@ class PostsController extends Controller
         //     }
         // }
         // dd(DB::getQueryLog());
-        return view('posts.index', ['posts' => BlogPost::all()]);
+        return view(
+            'posts.index',
+            [
+                'posts' => $posts
+            ]
+        );
     }
 
     /**
