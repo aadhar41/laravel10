@@ -8,6 +8,11 @@
                     @if (now()->diffInMinutes($post->created_at) < 5)
                         <span class="badge rounded-pill bg-primary mx-2">New !</span>
                     @endif
+                    @if ($post->comments_count)
+                        <p>{{ $post->comments_count }} comments</p>
+                    @else
+                        <p>No comments yet!</p>
+                    @endif
                 </h3>
             </a>
         </h4>
