@@ -12,16 +12,15 @@
 
                 </h3>
             </a>
+        </h4>
+        <p class="m-2">
             @if ($post->comments_count)
                 {{ $post->comments_count }} comments
             @else
                 No comments yet!
             @endif
-        </h4>
         </p>
-    </div>
-    <div class="card-body">
-        <div class="mb-1">
+        <div class="m-2">
             <a name="" id="" class="btn btn-primary"
                 href="{{ route('posts.edit', ['post' => $post->id]) }}" role="button"><i
                     class="fas fa-edit"></i>Edit</a>

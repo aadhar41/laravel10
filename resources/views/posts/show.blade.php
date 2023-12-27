@@ -17,4 +17,27 @@
             Added {{ $posts->created_at->diffForHumans() }}
         </div>
     </div>
+
+
+    <div class="card text-muted bg-light mt-2">
+        <div class="card-header">
+            <h4 class="card-title">
+                <h4>Comments</h4>
+            </h4>
+        </div>
+        <div class="card-body">
+            @forelse ($posts->comments as $comment)
+                <blockquote class="blockquote">
+                    <p class="mb-3">
+                        {{ $comment->content }}
+                    </p>
+                    <footer class="blockquote-footer"> <cite title="Source Title">Added
+                            {{ $comment->created_at->diffForHumans() }}</cite></footer>
+                </blockquote>
+            @empty
+                <p>No Comments Yet!</p>
+            @endforelse
+        </div>
+    </div>
+
 @endsection
