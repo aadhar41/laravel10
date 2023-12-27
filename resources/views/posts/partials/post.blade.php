@@ -1,5 +1,6 @@
 <div class="card mb-2">
     <div class="card-title">
+        <p>
         <h4>
             <a name="" id="" class="badge text-muted"
                 href="{{ route('posts.show', ['post' => $post->id]) }}" role="button">
@@ -8,14 +9,16 @@
                     @if (now()->diffInMinutes($post->created_at) < 5)
                         <span class="badge rounded-pill bg-primary mx-2">New !</span>
                     @endif
-                    @if ($post->comments_count)
-                        <p>{{ $post->comments_count }} comments</p>
-                    @else
-                        <p>No comments yet!</p>
-                    @endif
+
                 </h3>
             </a>
+            @if ($post->comments_count)
+                {{ $post->comments_count }} comments
+            @else
+                No comments yet!
+            @endif
         </h4>
+        </p>
     </div>
     <div class="card-body">
         <div class="mb-1">
