@@ -87,7 +87,44 @@
                 <a class="p-2 text-dark" href="{{ route('home.contact') }}">Contact</a>
                 <a class="p-2 text-dark" href="{{ route('posts.index') }}">Blog Posts</a>
                 <a class="p-2 text-dark" href="{{ route('posts.create') }}">Add Blog Posts</a>
+
             </nav>
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav">
+                <!-- Authentication Links -->
+                @guest
+                    @if (Route::has('login'))
+                        <li class="">
+                            <a class="text-dark" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                    @endif
+
+                    @if (Route::has('register'))
+                        <li class="">
+                            <a class="text-dark" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                    @endif
+                @else
+                    <li class="dropdown">
+                        <a id="navbarDropdown" class="text-dark dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="text-dark dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endguest
+            </ul>
         </div>
         <main class="py-4">
             <div class="container">
