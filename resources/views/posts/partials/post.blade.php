@@ -7,7 +7,10 @@
                 <h3>
                     {{ $post->title }}
                     @if (now()->diffInMinutes($post->created_at) < 5)
-                        <span class="badge rounded-pill bg-primary mx-2">New !</span>
+                        <span
+                            class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill m-2">New
+                            !
+                        </span>
                     @endif
 
                 </h3>
