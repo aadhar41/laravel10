@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('contact');
+        $this->middleware('auth')->except(['contact', 'home']);
     }
 
     public function index()

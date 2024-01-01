@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'home'])
-    // ->middleware('auth');
     ->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])
     ->name('contact');
