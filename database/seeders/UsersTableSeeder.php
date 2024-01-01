@@ -13,7 +13,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $usersCount = max((int) $this->command->ask('How many users would you like?', 10), 1);
         User::factory()->johnDoe()->create();
-        User::factory(20)->create();
+        User::factory($usersCount)->create();
     }
 }
