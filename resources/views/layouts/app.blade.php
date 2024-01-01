@@ -83,8 +83,8 @@
                 Laravel App
             </h5>
             <nav class="my-2 my-md-0 mr-md-3 ms-auto">
-                <a class="p-2 text-dark" href="{{ route('home.index') }}">{{ __('Home') }}</a>
-                <a class="p-2 text-dark" href="{{ route('home.contact') }}">{{ __('Contact') }}</a>
+                <a class="p-2 text-dark" href="{{ route('home') }}">{{ __('Home') }}</a>
+                <a class="p-2 text-dark" href="{{ route('contact') }}">{{ __('Contact') }}</a>
                 <a class="p-2 text-dark" href="{{ route('posts.index') }}">{{ __('Blog Posts') }}</a>
                 <a class="p-2 text-dark" href="{{ route('posts.create') }}">{{ __('Add Blog Posts') }}</a>
                 @guest
