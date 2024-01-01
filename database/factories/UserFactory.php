@@ -41,4 +41,12 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    public function johnDoe(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'name' => 'John Doe',
+            'email' => 'johndoe2024@mailinator.com',
+        ]);
+    }
 }

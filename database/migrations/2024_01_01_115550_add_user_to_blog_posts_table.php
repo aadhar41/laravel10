@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('blog_posts', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->nullable();
+        Schema::table('blog_posts', function (Blueprint $table) {
             if (env('DB_CONNECTION') === 'sqlite_testing') {
-                $table->text('content')->nullable();
+                $table->unsignedBigInteger('user_id')->default(0);
             } else {
-                $table->text('content');
+                $table->unsignedBigInteger('user_id');
             }
-            $table->timestamps();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
         });
     }
 
@@ -28,6 +28,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('blog_posts');
+        Schema::table('blog_posts', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+        });
     }
 };
