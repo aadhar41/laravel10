@@ -20,6 +20,12 @@ class BlogPost extends Model
 
     protected $fillable = ['title', 'content'];
 
+    // For test error datatime format was not matching.
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
+
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
