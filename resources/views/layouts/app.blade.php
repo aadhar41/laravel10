@@ -14,6 +14,21 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <style>
+        .ribbon {
+            width: 60px;
+            font-size: 14px;
+            padding: 4px;
+            position: absolute;
+            right: -25px;
+            top: -12px;
+            text-align: center;
+            border-radius: 25px;
+            transform: rotate(20deg);
+            background-color: #ff9800;
+            color: white;
+        }
+    </style>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>

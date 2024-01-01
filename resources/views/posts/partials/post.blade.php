@@ -1,4 +1,4 @@
-<div class="card mb-2">
+<div class="card mb-3">
     <div class="card-title">
         <p>
         <h4>
@@ -7,10 +7,7 @@
                 <h3>
                     {{ $post->title }}
                     @if (now()->diffInMinutes($post->created_at) < 5)
-                        <span
-                            class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill m-2">New
-                            !
-                        </span>
+                        <span class="ribbon">NEW</span>
                     @endif
 
                 </h3>

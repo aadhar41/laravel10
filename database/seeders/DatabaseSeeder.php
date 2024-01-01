@@ -19,20 +19,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $doe = User::factory()->johnDoe()->create();
-        $else = User::factory(20)->create();
-
-        $users = $else->concat([$doe]);
-
-        $posts = BlogPost::factory(50)->make()->each(function ($post) use ($users) {
-            $post->user_id = $users->random()->id;
-            $post->save();
-        });
-
-        $comments = Comment::factory(150)->make()->each(function ($comment) use ($posts) {
-            $comment->blog_post_id = $posts->random()->id;
-            $comment->save();
-        });
+        $this->call(
+            [
+                UsersTableSeeder::class,
+                BlogPostsTableSeeder::class,
+                CommentsTableSeeder::class,
+            ]
+        );
 
         // \App\Models\User::factory(10)->create();
 
