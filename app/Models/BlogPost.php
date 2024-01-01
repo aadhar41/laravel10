@@ -29,8 +29,8 @@ class BlogPost extends Model
      */
     protected static function booted(): void
     {
-        static::deleting(function (BlogPost $blogPost) {
-            $blogPost->comments()->delete();
-        });
+        // static::deleting(function (BlogPost $blogPost) {
+        //     $blogPost->comments()->delete();
+        // });
     }
 }
