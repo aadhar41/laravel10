@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('blog_posts', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->text('content')->nullable();
+            if (env('DB_CONNECTION') === 'sqlite_testing') {
+                $table->text('content')->nullable();
+            } else {
+                $table->text('content');
+            }
             $table->timestamps();
         });
     }
