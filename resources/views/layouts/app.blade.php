@@ -83,48 +83,32 @@
                 Laravel App
             </h5>
             <nav class="my-2 my-md-0 mr-md-3 ms-auto">
-                <a class="p-2 text-dark" href="{{ route('home.index') }}">Home</a>
-                <a class="p-2 text-dark" href="{{ route('home.contact') }}">Contact</a>
-                <a class="p-2 text-dark" href="{{ route('posts.index') }}">Blog Posts</a>
-                <a class="p-2 text-dark" href="{{ route('posts.create') }}">Add Blog Posts</a>
-
-            </nav>
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav">
-                <!-- Authentication Links -->
+                <a class="p-2 text-dark" href="{{ route('home') }}">{{ __('Home') }}</a>
+                <a class="p-2 text-dark" href="{{ route('contact') }}">{{ __('Contact') }}</a>
+                <a class="p-2 text-dark" href="{{ route('posts.index') }}">{{ __('Blog Posts') }}</a>
+                <a class="p-2 text-dark" href="{{ route('posts.create') }}">{{ __('Add Blog Posts') }}</a>
                 @guest
-                    @if (Route::has('login'))
-                        <li class="">
-                            <a class="text-dark" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                    @endif
-
                     @if (Route::has('register'))
-                        <li class="">
-                            <a class="text-dark" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
+                        <a class="p-2 text-dark" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    @endif
+                    @if (Route::has('login'))
+                        <a class="p-2 text-dark" href="{{ route('login') }}">{{ __('Login') }}</a>
                     @endif
                 @else
-                    <li class="dropdown">
-                        <a id="navbarDropdown" class="text-dark dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
-                        </a>
+                    <a class="p-2 text-dark" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }} ( @auth
+                            {{ auth()->user()->name }}
+                        @endauth )
+                    </a>
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="text-dark dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 @endguest
-            </ul>
+            </nav>
+
         </div>
         <main class="py-4">
             <div class="container">
