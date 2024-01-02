@@ -29,6 +29,7 @@ class BlogPostPolicy
      */
     public function create(User $user): bool
     {
+        dd('creating..');
         return true;
     }
 

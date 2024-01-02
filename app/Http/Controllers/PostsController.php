@@ -72,7 +72,7 @@ class PostsController extends Controller
     public function show(string $id)
     {
         $blogPost = BlogPost::with('comments')->findOrFail($id);
-        return view('posts.show', ['posts' => BlogPost::with('comments')->findOrFail($id)]);
+        return view('posts.show', ['posts' => $blogPost]);
     }
 
     /**
@@ -86,7 +86,8 @@ class PostsController extends Controller
         // $this->authorize('update-post', $post);
 
         // Via Policies
-        $this->authorize('update', $post);
+        // $this->authorize('update', $post);
+        $this->authorize($post);
 
         return view('posts.edit', ['post' => BlogPost::findOrFail($id)]);
     }
@@ -104,7 +105,8 @@ class PostsController extends Controller
         // $this->authorize('update-post', $post);
 
         // Via Policies
-        $this->authorize('update', $post);
+        // $this->authorize('update', $post);
+        $this->authorize($post);
 
         $validated = $request->validated();
         $post->fill($validated);
@@ -128,7 +130,8 @@ class PostsController extends Controller
         // $this->authorize('delete-post', $post);
 
         // Via Policies
-        $this->authorize('delete', $post);
+        // $this->authorize('delete', $post);
+        $this->authorize($post);
 
         $post->delete();
 
