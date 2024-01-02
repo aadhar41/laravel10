@@ -4,16 +4,41 @@
 @section('content')
     <div class="jumbotron">
         <h1 class="display-3">Contact Page</h1>
-        <p class="lead">This is the content of the contact page. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Modi eum aliquam odio, voluptatibus
-            corrupti repudiandae hic aliquid iusto. Similique quia atque quidem corrupti repudiandae asperiores ullam
-            consectetur pariatur maiores natus? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora voluptatem
-            saepe mollitia vitae deserunt molestiae ipsam dolores repellendus eum aspernatur, placeat pariatur, ex
-            consectetur! Tempore unde expedita ipsum pariatur neque.</p>
-        <hr class="my-2">
-        <p>More info</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">load more..</a>
-        </p>
+        <p>This is the content of the contact page.</p>
+        @can('home.secret')
+            <div class="alert alert-primary" role="alert">
+                <a href="{{ route('secret') }}" class="alert-link">Special Contact Details</a>
+            </div>
+        @endcan
+        <div class="container text-muted">
+            <div class="wrap-contact2">
+                <form action="" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label for="">Name</label>
+                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
+                            placeholder="">
+                        <small id="helpId" class="form-text text-muted">Help text</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">E-Mail</label>
+                        <input type="email" class="form-control" name="" id=""
+                            aria-describedby="emailHelpId" placeholder="">
+                        <small id="emailHelpId" class="form-text text-muted">Help text</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Message</label>
+                        <textarea class="form-control" name="" id="" rows="5"></textarea>
+                    </div>
+
+                    <div class="row px-2 my-3">
+                        <button type="submit" class="btn btn-block btn-primary">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
     </div>
 @endsection

@@ -6,6 +6,7 @@ use App\Http\Requests\StorePost;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class PostsController extends Controller
 {
@@ -29,7 +30,7 @@ class PostsController extends Controller
                     $query->where('created_at', '>', '2023-12-24 08:23:37');
                 }
             ]
-        )->orderBy('id', 'desc')->get();
+        )->with('user')->orderBy('id', 'desc')->get();
         // DB::connection()->enableQueryLog();
         // $posts = BlogPost::with('comments')->get();
         // foreach ($posts as $post) {
@@ -71,7 +72,7 @@ class PostsController extends Controller
     public function show(string $id)
     {
         $blogPost = BlogPost::with('comments')->findOrFail($id);
-        return view('posts.show', ['posts' => BlogPost::with('comments')->findOrFail($id)]);
+        return view('posts.show', ['posts' => $blogPost]);
     }
 
     /**
@@ -79,6 +80,15 @@ class PostsController extends Controller
      */
     public function edit(string $id)
     {
+        $post = BlogPost::findOrFail($id);
+
+        // Via Gate
+        // $this->authorize('update-post', $post);
+
+        // Via Policies
+        // $this->authorize('update', $post);
+        $this->authorize($post);
+
         return view('posts.edit', ['post' => BlogPost::findOrFail($id)]);
     }
 
@@ -88,6 +98,16 @@ class PostsController extends Controller
     public function update(StorePost $request, string $id)
     {
         $post = BlogPost::findOrFail($id);
+        // if (Gate::denies('update-post', $post)) {
+        //     abort(403, "You are not authorized to update this blog post!");
+        // }
+        // Via Gates
+        // $this->authorize('update-post', $post);
+
+        // Via Policies
+        // $this->authorize('update', $post);
+        $this->authorize($post);
+
         $validated = $request->validated();
         $post->fill($validated);
         $post->save();
@@ -102,6 +122,17 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = BlogPost::findOrFail($id);
+        // if (Gate::denies('delete-post', $post)) {
+        //     abort(403, "You are not authorized to delete this blog post!");
+        // }
+
+        // Via Gates
+        // $this->authorize('delete-post', $post);
+
+        // Via Policies
+        // $this->authorize('delete', $post);
+        $this->authorize($post);
+
         $post->delete();
 
         session()->flash('status', 'Blog post deleted!');
