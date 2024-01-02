@@ -10,41 +10,41 @@
                         <form action="{{ route('register') }}" method="POST">
                             @csrf
 
-                            <div class="form-group mb-2">
+                            <div class="form-floating mb-2">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                                    id="name" aria-describedby="helpId" placeholder="{{ __('Name') }}"
+                                    value="{{ old('name') }}" autocomplete="off">
                                 <label for="name">{{ __('Name') }}</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" id="name" aria-describedby="helpId"
-                                    placeholder="{{ __('Name') }}" value="{{ old('name') }}" autocomplete="off">
                                 @error('name')
                                     <small id="helpId" class="form-text invalid-feedback">{{ $message }}</small>
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-2">
-                                <label for="email">{{ __('E-mail') }}</label>
+                            <div class="form-floating mb-2">
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
                                     name="email" id="email" aria-describedby="emailHelpId"
                                     placeholder="{{ __('E-mail') }}" value="{{ old('email') }}" autocomplete="off">
+                                <label for="email">{{ __('E-mail') }}</label>
                                 @error('email')
                                     <small id="emailHelpId" class="form-text invalid-feedback">{{ $message }}</small>
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-2">
-                                <label for="pasword">{{ __('Password') }}</label>
+                            <div class="form-floating mb-2">
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     name="password" id="password" placeholder="{{ __('Password') }}" autocomplete="off" />
+                                <label for="pasword">{{ __('Password') }}</label>
                                 @error('password')
                                     <small id="emailHelpId" class="form-text invalid-feedback">{{ $message }}</small>
                                 @enderror
                             </div>
 
-                            <div class="form-group mb-2">
-                                <label for="password_confirmation">{{ __('Confirm Password') }}</label>
+                            <div class="form-floating mb-2">
                                 <input type="password"
                                     class="form-control @error('password_confirmation') is-invalid @enderror"
                                     name="password_confirmation" id="password_confirmation"
                                     placeholder="{{ __('Confirm Password') }}" autocomplete="off" />
+                                <label for="password_confirmation">{{ __('Confirm Password') }}</label>
                                 @error('password_confirmation')
                                     <small id="emailHelpId" class="form-text text-danger">{{ $message }}</small>
                                 @enderror

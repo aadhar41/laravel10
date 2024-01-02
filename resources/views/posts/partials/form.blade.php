@@ -11,8 +11,8 @@
 
 <div class="form-floating mb-3">
     <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content"
-        placeholder="Content" style="height: 250px"></textarea>
-    <label for="floatingTextarea2">Comments</label>
+        placeholder="Content" style="height: 250px">{{ old('content', optional($post ?? null)->content) }}</textarea>
+    <label for="floatingTextarea2">Content</label>
     <small id="content">
         @error('content')
             <p class="text-danger">{{ $message }}</p>
