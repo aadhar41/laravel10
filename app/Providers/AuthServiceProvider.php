@@ -35,11 +35,11 @@ class AuthServiceProvider extends ServiceProvider
         //     return $user->id === $post->user_id;
         // });
 
-        // Gate::before(function ($user, $ability) {
-        //     if ($user->is_admin && in_array($ability, ['update-post'])) {
-        //         return true;
-        //     }
-        // });
+        Gate::before(function ($user, $ability) {
+            if ($user->is_admin && in_array($ability, ['update'])) {
+                return true;
+            }
+        });
 
         // Gate::after(function ($user, $ability, $result) {
         //     if ($user->is_admin && in_array($ability, ['update-post'])) {

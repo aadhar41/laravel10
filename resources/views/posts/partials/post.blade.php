@@ -25,15 +25,26 @@
                 No comments yet!
             @endif
         </p>
+
         <div class="m-2">
-            <a name="" id="" class="btn btn-primary"
-                href="{{ route('posts.edit', ['post' => $post->id]) }}" role="button"><i
-                    class="fas fa-edit"></i>Edit</a>
-            <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" class="d-inline" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Delete!</button>
-            </form>
+
+            @can('update', $post)
+                <a name="" id="" class="btn btn-primary"
+                    href="{{ route('posts.edit', ['post' => $post->id]) }}" role="button"><i
+                        class="fas fa-edit"></i>Edit</a>
+            @endcan
+
+            {{-- @cannot('delete', $post)
+                <small class="text-muted">You can't delete this post.</small>
+            @endcannot --}}
+
+            @can('delete', $post)
+                <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" class="d-inline" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete!</button>
+                </form>
+            @endcan
         </div>
     </div>
 </div>
