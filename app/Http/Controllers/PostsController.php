@@ -81,9 +81,7 @@ class PostsController extends Controller
     public function edit(string $id)
     {
         $post = BlogPost::findOrFail($id);
-        if (Gate::denies('update-post', $post)) {
-            abort(403, "You are not authorized to edit this blog post!");
-        }
+        $this->authorize('update-post', $post);
         return view('posts.edit', ['post' => BlogPost::findOrFail($id)]);
     }
 
@@ -93,9 +91,10 @@ class PostsController extends Controller
     public function update(StorePost $request, string $id)
     {
         $post = BlogPost::findOrFail($id);
-        if (Gate::denies('update-post', $post)) {
-            abort(403, "You are not authorized to edit this blog post!");
-        }
+        // if (Gate::denies('update-post', $post)) {
+        //     abort(403, "You are not authorized to update this blog post!");
+        // }
+        $this->authorize('update-post', $post);
         $validated = $request->validated();
         $post->fill($validated);
         $post->save();
@@ -110,6 +109,10 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = BlogPost::findOrFail($id);
+        // if (Gate::denies('delete-post', $post)) {
+        //     abort(403, "You are not authorized to delete this blog post!");
+        // }
+        $this->authorize('delete-post', $post);
         $post->delete();
 
         session()->flash('status', 'Blog post deleted!');
