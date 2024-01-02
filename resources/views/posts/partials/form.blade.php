@@ -1,19 +1,19 @@
-<div class="form-group mb-3">
-    <label class="text-muted" for="title"><strong>Title</strong></label>
+<div class="form-floating mb-3">
     <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror"
-        placeholder="Title" value="{{ old('title', optional($post ?? null)->title) }}" aria-describedby="helpId">
-    <small id="helpId" class="text-muted">
+        placeholder="Title" value="{{ old('title', optional($post ?? null)->title) }}" />
+    <label for="title">Title</label>
+    <small id="helpId">
         @error('title')
             <p class="text-danger">{{ $message }}</p>
         @enderror
     </small>
 </div>
 
-<div class="form-group mb-3">
-    <label class="text-muted" for="content"><strong>Content</strong></label>
+<div class="form-floating mb-3">
     <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content"
-        placeholder="Content" rows="10">{{ old('content', optional($post ?? null)->content) }}</textarea>
-    <small id="content" class="text-muted">
+        placeholder="Content" style="height: 250px"></textarea>
+    <label for="floatingTextarea2">Comments</label>
+    <small id="content">
         @error('content')
             <p class="text-danger">{{ $message }}</p>
         @enderror
