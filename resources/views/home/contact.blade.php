@@ -4,6 +4,7 @@
 @section('content')
     <div class="jumbotron">
         <h1 class="display-3">Contact Page</h1>
+        <p>This is the content of the contact page.</p>
         @can('home.secret')
             <div class="alert alert-primary" role="alert">
                 <a href="{{ route('secret') }}" class="alert-link">Special Contact Details</a>
