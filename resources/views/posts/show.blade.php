@@ -15,7 +15,7 @@
             <p class="card-text">{{ $posts->content }}</p>
         </div>
         <div class="card-footer text-muted">
-            Added {{ $posts->created_at->diffForHumans() }}
+            Added <small>{{ $posts->created_at->diffForHumans() }}</small>
         </div>
     </div>
 

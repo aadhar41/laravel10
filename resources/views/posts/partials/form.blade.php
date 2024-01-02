@@ -11,7 +11,7 @@
 
 <div class="form-group mb-3">
     <label class="text-muted" for="content"><strong>Content</strong></label>
-    <textarea class="form-control" name="content" id="content" placeholder="Content" rows="5">{{ old('content', optional($post ?? null)->content) }}</textarea>
+    <textarea class="form-control" name="content" id="content" placeholder="Content" rows="10">{{ old('content', optional($post ?? null)->content) }}</textarea>
     <small id="content" class="text-muted">
         @error('content')
             <p class="text-danger">{{ $message }}</p>

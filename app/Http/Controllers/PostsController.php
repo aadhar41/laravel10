@@ -6,6 +6,7 @@ use App\Http\Requests\StorePost;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class PostsController extends Controller
 {
@@ -79,6 +80,10 @@ class PostsController extends Controller
      */
     public function edit(string $id)
     {
+        $post = BlogPost::findOrFail($id);
+        if (Gate::denies('update-post', $post)) {
+            abort(403, "You are not authorized to edit this blog post!");
+        }
         return view('posts.edit', ['post' => BlogPost::findOrFail($id)]);
     }
 
@@ -88,6 +93,9 @@ class PostsController extends Controller
     public function update(StorePost $request, string $id)
     {
         $post = BlogPost::findOrFail($id);
+        if (Gate::denies('update-post', $post)) {
+            abort(403, "You are not authorized to edit this blog post!");
+        }
         $validated = $request->validated();
         $post->fill($validated);
         $post->save();
