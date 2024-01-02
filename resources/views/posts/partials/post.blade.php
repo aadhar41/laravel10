@@ -12,7 +12,12 @@
 
                 </h3>
             </a>
+
         </h4>
+        <p class="mx-2 text-muted">
+            <strong>Added </strong><small> {{ $post->created_at->diffForHumans() }}</small>
+            <strong>By </strong>{{ $post->user->name }}
+        </p>
         <p class="m-2">
             @if ($post->comments_count)
                 {{ $post->comments_count }} comments
