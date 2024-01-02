@@ -19,7 +19,7 @@ class BlogPost extends Model
      */
     protected $table = 'blog_posts';
 
-    protected $fillable = ['title', 'content'];
+    protected $fillable = ['title', 'content', 'user_id'];
 
     // For test error datatime format was not matching.
     protected $casts = [
