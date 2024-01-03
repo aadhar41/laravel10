@@ -22,7 +22,7 @@ class BlogPost extends Model
 
     protected $fillable = ['title', 'content', 'user_id'];
 
-    // For test error datatime format was not matching.
+    // For test error datetime format was not matching.
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',

@@ -21,6 +21,10 @@ class PostTest extends TestCase
         $response->assertSeeText('No Blog Post.');
     }
 
+    /**
+     * The function tests whether a blog post with no comments is displayed correctly on the '/posts'
+     * page.
+     */
     public function test_see_one_blog_post_when_there_is_one_with_no_comments(): void
     {
         $this->createDummyBlogPost();
@@ -37,6 +41,10 @@ class PostTest extends TestCase
         ]);
     }
 
+    /**
+     * The function tests whether a blog post with comments is displayed correctly with the correct
+     * number of comments.
+     */
     public function test_see_one_blog_post_when_there_is_one_with_comments(): void
     {
         // Arrange
@@ -55,6 +63,9 @@ class PostTest extends TestCase
         $response->assertSeeText('4 comments');
     }
 
+    /**
+     * The function tests if valid data can be stored in a blog post.
+     */
     public function test_store_valid_data(): void
     {
         $params = [
@@ -69,6 +80,10 @@ class PostTest extends TestCase
         $this->assertEquals(session('status'), 'The blog post created!');
     }
 
+    /**
+     * The function tests the failure case of storing a post by checking if the title and content
+     * fields have the minimum required characters.
+     */
     public function test_store_fail(): void
     {
         $params = [
@@ -86,6 +101,10 @@ class PostTest extends TestCase
         $this->assertEquals($messages['content'][0], 'The content field must be at least 10 characters.');
     }
 
+    /**
+     * The function tests the update functionality of a blog post by changing its title and content and
+     * asserting that the changes are reflected in the database.
+     */
     public function test_update_valid_post(): void
     {
         $user = $this->user();
@@ -114,6 +133,11 @@ class PostTest extends TestCase
         ]);
     }
 
+    /**
+     * The function tests the deletion of a blog post by asserting that the post exists in the
+     * database, performing a delete request, asserting the response status and session status, and
+     * finally asserting that the post has been soft deleted.
+     */
     public function test_delete(): void
     {
         $user = $this->user();
@@ -132,6 +156,16 @@ class PostTest extends TestCase
     }
 
 
+    /**
+     * The function creates a dummy blog post with a new title and content, and assigns it to a user if
+     * provided, otherwise it assigns it to the current user.
+     *
+     * @param userId The `userId` parameter is an optional parameter that specifies the user ID for the
+     * blog post. If a `userId` is provided, it will be used as the user ID for the blog post. If no
+     * `userId` is provided, it will default to the ID of the currently authenticated user.
+     *
+     * @return BlogPost a newly created instance of the BlogPost model.
+     */
     public function createDummyBlogPost($userId = null): BlogPost
     {
         // Arrange

@@ -9,7 +9,8 @@ use Tests\TestCase;
 class HomeTest extends TestCase
 {
     /**
-     * A basic feature home page.
+     * The function tests if the home page is working correctly by checking if it contains the expected
+     * text.
      */
     public function test_home_page_is_working_correctly(): void
     {
@@ -19,7 +20,8 @@ class HomeTest extends TestCase
     }
 
     /**
-     * A basic feature contact page.
+     * The function tests if the contact page is working correctly by checking if it contains the
+     * expected text.
      */
     public function test_contact_page_is_working_correctly(): void
     {
