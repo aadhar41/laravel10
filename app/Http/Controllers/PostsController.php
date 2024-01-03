@@ -30,7 +30,7 @@ class PostsController extends Controller
                     $query->where('created_at', '>', '2023-12-24 08:23:37');
                 }
             ]
-        )->with('user')->orderBy('id', 'desc')->get();
+        )->with('user')->get();
         // DB::connection()->enableQueryLog();
         // $posts = BlogPost::with('comments')->get();
         // foreach ($posts as $post) {
@@ -61,6 +61,7 @@ class PostsController extends Controller
     public function store(StorePost $request)
     {
         $validated = $request->validated();
+        $validated['user_id'] = $request->user()->id;
         $post = BlogPost::create($validated);
         $request->session()->flash('status', 'The blog post created!');
         return redirect()->route('posts.show', ['post' => $post->id]);

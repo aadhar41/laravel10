@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\LatestScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,9 +20,9 @@ class BlogPost extends Model
      */
     protected $table = 'blog_posts';
 
-    protected $fillable = ['title', 'content'];
+    protected $fillable = ['title', 'content', 'user_id'];
 
-    // For test error datatime format was not matching.
+    // For test error datetime format was not matching.
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
@@ -59,5 +60,7 @@ class BlogPost extends Model
         static::restoring(function (BlogPost $blogPost) {
             $blogPost->comments()->restore();
         });
+
+        static::addGlobalScope(new LatestScope);
     }
 }
