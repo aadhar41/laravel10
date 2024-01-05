@@ -134,7 +134,7 @@
                     </div>
                     <div class="col-4 text-center">
                         <a class="blog-header-logo text-body-emphasis text-decoration-none"
-                            href="javascript:void(0)">Blog</a>
+                            href="{{ route('home') }}">Blog</a>
                     </div>
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <a class="link-secondary" href="javascript:void(0)" aria-label="Search">
