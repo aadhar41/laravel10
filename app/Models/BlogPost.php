@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Scopes\LatestScope;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -35,7 +36,7 @@ class BlogPost extends Model
      */
     public function comments(): HasMany
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->latest();
     }
 
     /**
@@ -46,6 +47,11 @@ class BlogPost extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeLatest(EloquentBuilder $query): EloquentBuilder
+    {
+        return $query->orderBy(static::CREATED_AT, 'desc');
     }
 
     /**
@@ -61,6 +67,6 @@ class BlogPost extends Model
             $blogPost->comments()->restore();
         });
 
-        static::addGlobalScope(new LatestScope);
+        // static::addGlobalScope(new LatestScope);
     }
 }

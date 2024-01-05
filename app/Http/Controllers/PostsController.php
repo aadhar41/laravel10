@@ -42,7 +42,7 @@ class PostsController extends Controller
         return view(
             'posts.index',
             [
-                'posts' => $posts
+                'posts' => BlogPost::latest()->withCount('comments')->get()
             ]
         );
     }
@@ -72,6 +72,10 @@ class PostsController extends Controller
      */
     public function show(string $id)
     {
+        // $blogPost = BlogPost::with(['comments' => function ($query) {
+        //     return $query->latest();
+        // }])->findOrFail($id);
+
         $blogPost = BlogPost::with('comments')->findOrFail($id);
         return view('posts.show', ['posts' => $blogPost]);
     }
