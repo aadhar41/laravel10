@@ -257,18 +257,27 @@
             {{-- Right Side Bar --}}
             <div class="col-md-4">
                 <div class="position-sticky" style="top: 2rem;">
-                    <div class="p-2 mb-3 bg-body-tertiary rounded">
-                        <h4 class="fst-italic">About</h4>
-                        <p class="mb-0">
-                            Customize this section to tell your visitors a little bit about your
-                            publication, writers, content, or something else entirely. Totally up to you.
-                        </p>
+                    <div class="mb-3 h-100 p-4 bg-body-tertiary border rounded-2">
+                        <h4 class="mb-0"><strong>Most Active</strong></h4><small>Users with most posts
+                            written.</small>
+                        <ol class="list-unstyled mb-0 mt-2">
+                            @foreach ($mostActive as $user)
+                                <li>
+                                    <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-2 link-body-emphasis text-decoration-none border-top text-muted"
+                                        href="javascript:void(0);">
+                                        <div class="col-lg-8">
+                                            <h6 class="mb-0">{{ $user->name }}</h6>
+                                        </div>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ol>
                     </div>
 
-                    <div>
-                        <h4 class="fst-italic">Most Commented</h4>
-                        <p>What people are currently taking about.</p>
-                        <ul class="list-unstyled">
+                    <div class="h-100 p-4 bg-body-tertiary border rounded-2">
+                        <h4 class="mb-0"><strong>Most Commented</strong></h4><small>What people are currently taking
+                            about.</small>
+                        <ul class="list-unstyled mt-2">
                             @foreach ($mostCommented as $post)
                                 <li>
                                     <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
@@ -281,6 +290,7 @@
                                     </a>
                                 </li>
                             @endforeach
+
                             {{--
                             <li>
                                 <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"

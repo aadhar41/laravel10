@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -53,5 +56,10 @@ class User extends Authenticatable
     public function blogPosts(): HasMany
     {
         return $this->hasMany(BlogPost::class);
+    }
+
+    public function scopeWithMostBlogPosts(EloquentBuilder $query): EloquentBuilder
+    {
+        return $query->withCount('blogPosts')->orderBy('blog_posts_count', 'desc');
     }
 }
