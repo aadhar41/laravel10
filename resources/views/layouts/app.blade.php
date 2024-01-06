@@ -193,8 +193,7 @@
         @yield('content')
 
         <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
-            <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a
-                    href="https://twitter.com/mdo">@mdo</a>.</p>
+            <p>Blog for <a href="avascript:void(0)">Blog</a> by <a href="javascript:void(0)">@aadhar41</a>.</p>
             <p class="mb-0">
                 <a href="javascript:void(0)">Back to top</a>
             </p>
