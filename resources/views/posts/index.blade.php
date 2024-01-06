@@ -257,6 +257,24 @@
             {{-- Right Side Bar --}}
             <div class="col-md-4">
                 <div class="position-sticky" style="top: 2rem;">
+
+                    <div class="mb-3 h-100 p-4 bg-body-tertiary border rounded-2">
+                        <h4 class="mb-0"><strong>Most Active Last Month</strong></h4><small>Users with most posts written
+                            last month.</small>
+                        <ol class="list-unstyled mb-0 mt-2">
+                            @foreach ($mostActiveLastMonth as $user)
+                                <li>
+                                    <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-2 link-body-emphasis text-decoration-none border-top text-muted"
+                                        href="javascript:void(0);">
+                                        <div class="col-lg-8">
+                                            <h6 class="mb-0">{{ $user->name }}</h6>
+                                        </div>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ol>
+                    </div>
+
                     <div class="mb-3 h-100 p-4 bg-body-tertiary border rounded-2">
                         <h4 class="mb-0"><strong>Most Active</strong></h4><small>Users with most posts
                             written.</small>

@@ -32,20 +32,17 @@ class PostsController extends Controller
                 }
             ]
         )->with('user')->get();
-        // DB::connection()->enableQueryLog();
-        // $posts = BlogPost::with('comments')->get();
-        // foreach ($posts as $post) {
-        //     foreach ($post->comments as $comment) {
-        //         echo $comment->content;
-        //     }
-        // }
-        // dd(DB::getQueryLog());
+
+        // echo '<pre>';
+        // print_r(User::withMostBlogPostsLastMonth()->withMostBlogPosts()->take(5)->get());
+        // die;
         return view(
             'posts.index',
             [
                 'posts' => BlogPost::latest()->withCount('comments')->get(),
                 'mostCommented' => BlogPost::mostCommented()->take(5)->get(),
                 'mostActive' => User::withMostBlogPosts()->take(5)->get(),
+                'mostActiveLastMonth' => User::withMostBlogPostsLastMonth()->take(5)->get(),
             ]
         );
     }

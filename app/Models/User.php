@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -61,5 +62,14 @@ class User extends Authenticatable
     public function scopeWithMostBlogPosts(EloquentBuilder $query): EloquentBuilder
     {
         return $query->withCount('blogPosts')->orderBy('blog_posts_count', 'desc');
+    }
+
+    public function scopeWithMostBlogPostsLastMonth(EloquentBuilder $query): EloquentBuilder
+    {
+        return $query->withCount(['blogPosts' => function (EloquentBuilder $query) {
+            return $query->where(static::CREATED_AT, '>=', Carbon::now()->subMonth(1));
+        }])
+            ->having('blog_posts_count', '>=', 4)
+            ->orderBy('blog_posts_count', 'desc');
     }
 }
