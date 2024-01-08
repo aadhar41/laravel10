@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePost;
 use App\Models\BlogPost;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -22,27 +23,13 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = BlogPost::withCount(
-            [
-                'comments',
-                'comments as new_comments' =>
-                function ($query) {
-                    $query->where('created_at', '>', '2023-12-24 08:23:37');
-                }
-            ]
-        )->with('user')->get();
-        // DB::connection()->enableQueryLog();
-        // $posts = BlogPost::with('comments')->get();
-        // foreach ($posts as $post) {
-        //     foreach ($post->comments as $comment) {
-        //         echo $comment->content;
-        //     }
-        // }
-        // dd(DB::getQueryLog());
         return view(
             'posts.index',
             [
-                'posts' => $posts
+                'posts' => BlogPost::latest()->withTrashed()->with('user')->withCount('comments')->get(),
+                'mostCommented' => BlogPost::mostCommented()->take(5)->get(),
+                'mostActive' => User::withMostBlogPosts()->take(5)->get(),
+                'mostActiveLastMonth' => User::withMostBlogPostsLastMonth()->take(5)->get(),
             ]
         );
     }
@@ -72,7 +59,11 @@ class PostsController extends Controller
      */
     public function show(string $id)
     {
-        $blogPost = BlogPost::with('comments')->findOrFail($id);
+        // $blogPost = BlogPost::with(['comments' => function ($query) {
+        //     return $query->latest();
+        // }])->findOrFail($id);
+
+        $blogPost = BlogPost::with(['comments', 'user'])->findOrFail($id);
         return view('posts.show', ['posts' => $blogPost]);
     }
 

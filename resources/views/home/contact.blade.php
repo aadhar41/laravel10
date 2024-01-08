@@ -2,6 +2,7 @@
 @section('title', 'Contact Page')
 
 @section('content')
+
     <div class="jumbotron">
         <h1 class="display-3 mx-2">Contact Page</h1>
         <p class="mx-3">This is the content of the contact page.</p>
@@ -42,4 +43,5 @@
             </div>
         </div>
     </div>
+
 @endsection

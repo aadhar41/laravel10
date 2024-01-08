@@ -20,6 +20,8 @@ class BlogPostFactory extends Factory
         return [
             'title' => fake()->sentence(10),
             'content' => fake()->paragraphs(5, true),
+            'created_at' => fake()->dateTimeBetween('-3 months'),
+            'updated_at' => fake()->dateTimeBetween('-3 months'),
         ];
     }
 

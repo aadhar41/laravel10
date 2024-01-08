@@ -2,6 +2,7 @@
 @section('title', 'Contact Page')
 
 @section('content')
+
     <div class="jumbotron">
         <h1 class="display-3">Secret Page</h1>
         <p class="lead">Special secret page content</p>
@@ -11,4 +12,5 @@
             <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">View</a>
         </p>
     </div>
+
 @endsection
