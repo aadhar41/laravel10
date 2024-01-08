@@ -2,12 +2,22 @@
     <div class="col p-4 d-flex flex-column position-static">
         <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
         <h3 class="mb-0">
-            {{ $post->title }}
+            @if ($post->trashed())
+                <del>
+            @endif
+            <p class="{{ $post->trashed() ? 'text-muted' : '' }}">
+                {{ $post->title }}
+            </p>
             @if (now()->diffInMinutes($post->created_at) < 5)
                 <span class="ribbon">NEW</span>
             @endif
+            @if ($post->trashed())
+                </del>
+            @endif
         </h3>
-        <div class="mb-1 text-body-secondary">{{ $post->created_at->diffForHumans() }}</div>
+        <div class="mb-1 text-body-secondary">Added {{ $post->created_at->diffForHumans() }} by
+            <strong>{{ $post->user->name }}</strong>
+        </div>
         <div class="mb-1 text-body-secondary">
             @if ($post->comments_count)
                 {{ $post->comments_count }} comments
@@ -23,13 +33,16 @@
                         class="fas fa-edit"></i>Edit</a>
             @endcan
 
-            @can('delete', $post)
-                <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" class="ms-1 bg-danger" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete!</button>
-                </form>
-            @endcan
+            @if (!$post->trashed())
+                @can('delete', $post)
+                    <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" class="ms-1 bg-danger"
+                        method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete!</button>
+                    </form>
+                @endcan
+            @endif
         </div>
 
 

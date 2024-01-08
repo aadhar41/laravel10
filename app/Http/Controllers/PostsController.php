@@ -23,24 +23,10 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = BlogPost::withCount(
-            [
-                'comments',
-                'comments as new_comments' =>
-                function ($query) {
-                    $query->where('created_at', '>', '2023-12-24 08:23:37');
-                }
-            ]
-        )->with('user')->get();
-
-        $blogPost = BlogPost::latest()->withCount('comments')->get();
-        // echo '<pre>';
-        // print_r($blogPost);
-        // die;
         return view(
             'posts.index',
             [
-                'posts' => BlogPost::latest()->withCount('comments')->get(),
+                'posts' => BlogPost::latest()->withTrashed()->with('user')->withCount('comments')->get(),
                 'mostCommented' => BlogPost::mostCommented()->take(5)->get(),
                 'mostActive' => User::withMostBlogPosts()->take(5)->get(),
                 'mostActiveLastMonth' => User::withMostBlogPostsLastMonth()->take(5)->get(),
@@ -77,7 +63,7 @@ class PostsController extends Controller
         //     return $query->latest();
         // }])->findOrFail($id);
 
-        $blogPost = BlogPost::with('comments')->findOrFail($id);
+        $blogPost = BlogPost::with(['comments', 'user'])->findOrFail($id);
         return view('posts.show', ['posts' => $blogPost]);
     }
 

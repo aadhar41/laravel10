@@ -3,7 +3,7 @@
 
 @section('content')
     <main class="container">
-        <div class="row g-5">
+        <div class="row">
             <div class="col-md-12">
 
                 <div class="card-group mb-2">
@@ -18,7 +18,8 @@
                             <p class="card-text">{{ $posts->content }}</p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-body-secondary">Added {{ $posts->created_at->diffForHumans() }}</small>
+                            <small class="text-body-secondary">Added {{ $posts->created_at->diffForHumans() }} by
+                                {{ $posts->user->name }}</small>
                         </div>
                     </div>
                 </div>
