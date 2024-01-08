@@ -10,9 +10,10 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $posts->title }}
-                                @if (now()->diffInMinutes($posts->created_at) < 5)
-                                    <span class="ribbon">NEW</span>
-                                    {{-- <span class="badge rounded-pill bg-primary mx-2">New !</span> --}}
+                                @if (now()->diffInMinutes($posts->created_at) < 20)
+                                    @component('badge', ['type' => 'primary'])
+                                        New!
+                                    @endcomponent
                                 @endif
                             </h5>
                             <p class="card-text">{{ $posts->content }}</p>
