@@ -33,8 +33,9 @@ class PostsController extends Controller
             ]
         )->with('user')->get();
 
+        $blogPost = BlogPost::latest()->withCount('comments')->get();
         // echo '<pre>';
-        // print_r(User::withMostBlogPostsLastMonth()->withMostBlogPosts()->take(5)->get());
+        // print_r($blogPost);
         // die;
         return view(
             'posts.index',

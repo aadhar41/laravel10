@@ -190,7 +190,13 @@
             </div>
         </div>
 
-        @yield('content')
+        <main class="container">
+            <div class="row g-5">
+                <div class="col-md-12">
+                    @yield('content')
+                </div>
+            </div>
+        </main>
 
         <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
             <p>Blog for <a href="avascript:void(0)">Blog</a> by <a href="javascript:void(0)">@aadhar41</a>.</p>
