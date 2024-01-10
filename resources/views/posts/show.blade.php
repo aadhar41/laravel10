@@ -17,8 +17,15 @@
                             <p class="card-text">{{ $posts->content }}</p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-body-secondary">Added {{ $posts->created_at->diffForHumans() }} by
-                                {{ $posts->user->name }}</small>
+                            <small class="text-body-secondary">
+                                <x-updated :name="$posts->user->name" :date="$posts->created_at">
+                                    Added
+                                </x-updated>
+                                &nbsp;|&nbsp;
+                                <x-updated :date="$posts->updated_at">
+                                    Updated
+                                </x-updated>
+                            </small>
                         </div>
                     </div>
                 </div>
@@ -36,8 +43,11 @@
                                         <p class="mb-3">
                                             {{ $comment->content }}
                                         </p>
-                                        <footer class="blockquote-footer"> <cite title="Source Title">Added
-                                                {{ $comment->created_at->diffForHumans() }}</cite></footer>
+                                        <footer class="blockquote-footer">
+                                            <x-updated :date="$comment->created_at">
+                                                Added
+                                            </x-updated>
+                                        </footer>
                                     </blockquote>
                                 @empty
                                     <p>No Comments Yet!</p>

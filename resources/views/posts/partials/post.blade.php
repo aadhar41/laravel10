@@ -18,8 +18,10 @@
                 </del>
             @endif
         </h3>
-        <div class="mb-1 text-body-secondary">Added {{ $post->created_at->diffForHumans() }} by
-            <strong>{{ $post->user->name }}</strong>
+        <div class="mb-1 text-body-secondary">
+            <x-updated :name="$post->user->name" :date="$post->created_at">
+                Added
+            </x-updated>
         </div>
         <div class="mb-1 text-body-secondary">
             @if ($post->comments_count)
