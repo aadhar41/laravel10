@@ -10,11 +10,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $posts->title }}
-                                @if (now()->diffInMinutes($posts->created_at) < 20)
-                                    @component('badge', ['type' => 'primary'])
-                                        New!
-                                    @endcomponent
-                                @endif
+                                <x-badge type='warning' :show="now()->diffInMinutes($posts->created_at) < 20">
+                                    New !
+                                </x-badge>
                             </h5>
                             <p class="card-text">{{ $posts->content }}</p>
                         </div>

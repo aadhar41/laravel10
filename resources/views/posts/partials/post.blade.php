@@ -7,12 +7,13 @@
             @endif
             <p class="{{ $post->trashed() ? 'text-muted' : '' }}">
                 {{ $post->title }}
+                @if (now()->diffInMinutes($post->created_at) < 2000)
+                    <x-badge type='warning' :show="now()->diffInMinutes($post->created_at) < 20">
+                        New !
+                    </x-badge>
+                @endif
             </p>
-            @if (now()->diffInMinutes($post->created_at) < 5)
-                @component('badge')
-                    New!
-                @endcomponent
-            @endif
+
             @if ($post->trashed())
                 </del>
             @endif
