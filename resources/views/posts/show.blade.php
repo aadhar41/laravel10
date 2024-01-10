@@ -4,10 +4,14 @@
 @section('content')
     <main class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
 
                 <div class="card-group mb-2">
                     <div class="card">
+                        <div class="card-header">
+                            <x-tags :tags="$posts->tags">
+                            </x-tags>
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title"><strong>{{ $posts->title }}</strong>
                                 <x-badge type='warning' :show="now()->diffInMinutes($posts->created_at) < 20">
@@ -25,6 +29,10 @@
                                 <x-updated :date="$posts->updated_at">
                                     Updated
                                 </x-updated>
+                            </small>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-body-secondary">
                                 <p class="my-1 text-bold">Currently read by {{ $counter }} peoples.</p>
                             </small>
                         </div>
@@ -58,6 +66,11 @@
                     </div>
                 </div>
 
+            </div>
+
+            {{-- Right Side Bar --}}
+            <div class="col-md-4">
+                @include('posts.partials._activity')
             </div>
         </div>
     </main>

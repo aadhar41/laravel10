@@ -26,4 +26,6 @@ Route::get('/secret', [App\Http\Controllers\HomeController::class, 'secret'])->n
 
 Route::resource('posts', PostsController::class);
 
+Route::get('/posts/tag/{tag}', [App\Http\Controllers\PostTagController::class, 'index'])->name('posts.tags.index');
+
 Auth::routes();
