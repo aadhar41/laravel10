@@ -184,7 +184,7 @@
                     <a class="nav-item nav-link link-body-emphasis"
                         href="{{ route('posts.index') }}">{{ __('Blog Posts') }}</a>
                     <a class="nav-item nav-link link-body-emphasis"
-                        href="{{ route('posts.create') }}">{{ __('Add Blog Posts') }}</a>
+                        href="{{ route('posts.create') }}">{{ __('Add Posts') }}</a>
 
                 </nav>
             </div>
@@ -193,6 +193,9 @@
         <main class="container">
             <div class="row g-5">
                 <div class="col-md-12">
+                    <x-errors>
+
+                    </x-errors>
                     @yield('content')
                 </div>
             </div>

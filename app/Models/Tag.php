@@ -20,6 +20,6 @@ class Tag extends Model
      */
     public function blogPosts(): BelongsToMany
     {
-        return $this->belongsToMany(BlogPost::class)->withTimestamps()->withCount('comments');
+        return $this->belongsToMany(BlogPost::class)->withTimestamps();
     }
 }

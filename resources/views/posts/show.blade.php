@@ -50,6 +50,10 @@
                             </div>
 
                             <p class="card-text">
+                                @include('comments._form')
+                            </p>
+
+                            <p class="card-text">
                                 @forelse ($posts->comments as $comment)
                                     <blockquote class="blockquote">
                                         <p class="mb-3">
