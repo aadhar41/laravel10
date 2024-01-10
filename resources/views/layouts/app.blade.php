@@ -176,7 +176,7 @@
             </header>
 
             <div class="nav-scroller py-1 mb-3 border-bottom">
-                <nav class="nav nav-underline justify-content-between">
+                <nav class="nav nav-underline justify-content-start">
                     <a class="nav-item nav-link link-body-emphasis active"
                         href="{{ route('home') }}">{{ __('Home') }}</a>
                     <a class="nav-item nav-link link-body-emphasis"

@@ -32,22 +32,28 @@
         </div>
 
         <div class="btn-group col-lg-2 my-2" role="group" aria-label="Button group name">
-            @can('update', $post)
-                <a name="" id="" class="btn btn-primary"
-                    href="{{ route('posts.edit', ['post' => $post->id]) }}" role="button"><i
-                        class="fas fa-edit"></i>Edit</a>
-            @endcan
-
-            @if (!$post->trashed())
-                @can('delete', $post)
-                    <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" class="ms-1 bg-danger"
-                        method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete!</button>
-                    </form>
+            @auth
+                @can('update', $post)
+                    <a name="" id="" class="btn btn-primary"
+                        href="{{ route('posts.edit', ['post' => $post->id]) }}" role="button"><i
+                            class="fas fa-edit"></i>Edit</a>
                 @endcan
-            @endif
+            @endauth
+
+
+            @auth
+                @if (!$post->trashed())
+                    @can('delete', $post)
+                        <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" class="ms-1 bg-danger"
+                            method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete!</button>
+                        </form>
+                    @endcan
+                @endif
+            @endauth
+
         </div>
 
 
