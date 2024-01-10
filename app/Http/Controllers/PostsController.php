@@ -61,7 +61,12 @@ class PostsController extends Controller
         //     return $query->latest();
         // }])->findOrFail($id);
         $blogPost = Cache::tags(['blog-post'])->remember("blog-post-{$id}", 60, function () use ($id) {
-            return BlogPost::with(['comments', 'user', 'tags'])->findOrFail($id);
+            return BlogPost::with([
+                'comments',
+                'comments.user',
+                'user',
+                'tags'
+            ])->findOrFail($id);
         });
 
         $sessionId = session()->getId();

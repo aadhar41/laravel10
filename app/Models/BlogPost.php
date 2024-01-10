@@ -119,7 +119,7 @@ class BlogPost extends Model
         });
 
         static::updating(function (BlogPost $blogPost) {
-            Cache::forget("blog-post-{$blogPost->id}");
+            Cache::tags(['blog-post'])->forget("blog-post-{$blogPost->id}");
         });
     }
 }
