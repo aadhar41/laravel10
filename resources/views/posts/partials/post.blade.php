@@ -1,6 +1,6 @@
 <div class="row g-0 border rounded flex-md-row mb-4 mt-2 shadow-sm h-md-250 position-relative">
     <div class="col p-4 d-flex flex-column position-static">
-        <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
+
         <h3 class="mb-0">
             @if ($post->trashed())
                 <del>
@@ -21,6 +21,9 @@
                 </del>
             @endif
         </h3>
+        <x-tags :tags="$post->tags">
+
+        </x-tags>
         <div class="mb-1 text-body-secondary">
             <x-updated :name="$post->user->name" :date="$post->created_at">
                 Added
