@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -71,6 +72,16 @@ class BlogPost extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
+
+    /**
+     * The function returns the latest comment associated with an image.
+     *
+     * @return HasOne a HasOne relationship instance.
+     */
+    public function image(): HasOne
+    {
+        return $this->hasOne(Comment::class)->latest();
     }
 
     /**
