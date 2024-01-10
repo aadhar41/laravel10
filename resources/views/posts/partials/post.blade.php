@@ -1,4 +1,4 @@
-<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 mt-2 shadow-sm h-md-250 position-relative">
+<div class="row g-0 border rounded flex-md-row mb-4 mt-2 shadow-sm h-md-250 position-relative">
     <div class="col p-4 d-flex flex-column position-static">
         <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
         <h3 class="mb-0">
@@ -7,16 +7,21 @@
             @endif
             <p class="{{ $post->trashed() ? 'text-muted' : '' }}">
                 {{ $post->title }}
+                @if (now()->diffInMinutes($post->created_at) < 2000)
+                    <x-badge type='warning' :show="now()->diffInMinutes($post->created_at) < 20">
+                        New !
+                    </x-badge>
+                @endif
             </p>
-            @if (now()->diffInMinutes($post->created_at) < 5)
-                <span class="ribbon">NEW</span>
-            @endif
+
             @if ($post->trashed())
                 </del>
             @endif
         </h3>
-        <div class="mb-1 text-body-secondary">Added {{ $post->created_at->diffForHumans() }} by
-            <strong>{{ $post->user->name }}</strong>
+        <div class="mb-1 text-body-secondary">
+            <x-updated :name="$post->user->name" :date="$post->created_at">
+                Added
+            </x-updated>
         </div>
         <div class="mb-1 text-body-secondary">
             @if ($post->comments_count)
