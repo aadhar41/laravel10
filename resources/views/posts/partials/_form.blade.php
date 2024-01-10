@@ -22,9 +22,9 @@
 
 <div class="mb-3">
     <label for="" class="form-label">Thumbnail</label>
-    <input type="file" class="form-control" name="thumbnail" id="thumbnail" placeholder="{{ __('Thumbnail') }}"
-        aria-describedby="fileHelpId" />
-    <div id="fileHelpId" class="form-text">File must be off type JPG, JPEG, PNG.</div>
+    <input type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" id="thumbnail"
+        placeholder="{{ __('Thumbnail') }}" aria-describedby="fileHelpId" />
+    <div id="fileHelpId" class="form-text">The content field must be a file of type: jpg, jpeg, png, gif, svg.</div>
     <small id="thumbnail">
         @error('thumbnail')
             <p class="text-danger">{{ $message }}</p>
