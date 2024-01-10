@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use App\Models\Scopes\DeletedAdminScope;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -73,6 +75,16 @@ class BlogPost extends Model
     }
 
     /**
+     * The function returns the latest comment associated with an image.
+     *
+     * @return HasOne a HasOne relationship instance.
+     */
+    public function image(): HasOne
+    {
+        return $this->hasOne(Image::class)->latest();
+    }
+
+    /**
      * The function "scopeLatest" orders the query results in descending order based on the
      * "created_at" column.
      *
@@ -103,6 +115,15 @@ class BlogPost extends Model
         return $query->withCount('comments')->orderBy('comments_count', 'desc');
     }
 
+    function scopeLatestWithRelations(EloquentBuilder $query): EloquentBuilder
+    {
+        return $query
+            ->latest()
+            ->with(['user', 'tags'])
+            ->withCount('comments')
+            ->orderBy('comments_count', 'desc');
+    }
+
     /**
      * The "booted" method of the model.
      */
@@ -112,6 +133,7 @@ class BlogPost extends Model
 
         static::deleting(function (BlogPost $blogPost) {
             $blogPost->comments()->delete();
+            Cache::tags(['blog-post'])->forget("blog-post-{$blogPost->id}");
         });
 
         static::restoring(function (BlogPost $blogPost) {
