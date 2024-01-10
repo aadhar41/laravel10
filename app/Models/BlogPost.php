@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Scopes\DeletedAdminScope;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -101,6 +102,15 @@ class BlogPost extends Model
     {
         // comments_count
         return $query->withCount('comments')->orderBy('comments_count', 'desc');
+    }
+
+    function scopeLatestWithRelations(EloquentBuilder $query): EloquentBuilder
+    {
+        return $query
+            ->latest()
+            ->with(['user', 'tags'])
+            ->withCount('comments')
+            ->orderBy('comments_count', 'desc');
     }
 
     /**

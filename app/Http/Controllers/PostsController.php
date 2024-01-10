@@ -27,7 +27,7 @@ class PostsController extends Controller
         return view(
             'posts.index',
             [
-                'posts' => BlogPost::latest()->with(['user', 'tags'])->withCount('comments')->get(),
+                'posts' => BlogPost::latestWithRelations()->get(),
             ]
         );
     }
