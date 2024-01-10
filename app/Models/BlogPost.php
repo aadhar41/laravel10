@@ -81,7 +81,7 @@ class BlogPost extends Model
      */
     public function image(): HasOne
     {
-        return $this->hasOne(Comment::class)->latest();
+        return $this->hasOne(Image::class)->latest();
     }
 
     /**

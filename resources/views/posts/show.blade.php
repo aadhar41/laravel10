@@ -16,10 +16,16 @@
                                 </x-badge>
                             </h4>
                             <p class="card-text">{{ $posts->content }}</p>
+                            <p class="card-text">
+                                <img src="{{ $posts->image->url() }}" class="img-fluid img-thumbnail rounded-top"
+                                    alt="Image" />
+                            </p>
                         </div>
-                        <div class="card-footer">
-                            <x-tags :tags="$posts->tags"></x-tags>
-                        </div>
+                        @isset($posts->tags)
+                            <div class="card-footer">
+                                <x-tags :tags="$posts->tags"></x-tags>
+                            </div>
+                        @endisset
                         <div class="card-footer">
                             <small class="text-body-secondary">
                                 <x-updated :name="$posts->user->name" :date="$posts->created_at">
