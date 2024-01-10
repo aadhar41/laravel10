@@ -69,7 +69,7 @@ class User extends Authenticatable
         return $query->withCount(['blogPosts' => function (EloquentBuilder $query) {
             return $query->where(static::CREATED_AT, '>=', Carbon::now()->subMonth(1));
         }])
-            ->having('blog_posts_count', '>=', 4)
+            ->has('blogPosts', '>=', 4)
             ->orderBy('blog_posts_count', 'desc');
     }
 }
