@@ -8,24 +8,27 @@
 
                 <div class="card-group mb-2">
                     <div class="card">
-                        <div class="card-header">
-                            <x-tags :tags="$posts->tags">
-                            </x-tags>
-                        </div>
+
                         <div class="card-body">
-                            <h5 class="card-title"><strong>{{ $posts->title }}</strong>
+                            <h4 class="card-title"><strong>{{ $posts->title }}</strong>
                                 <x-badge type='warning' :show="now()->diffInMinutes($posts->created_at) < 20">
                                     New !
                                 </x-badge>
-                            </h5>
+                            </h4>
                             <p class="card-text">{{ $posts->content }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <x-tags :tags="$posts->tags"></x-tags>
                         </div>
                         <div class="card-footer">
                             <small class="text-body-secondary">
                                 <x-updated :name="$posts->user->name" :date="$posts->created_at">
                                     Added
                                 </x-updated>
-                                &nbsp;|&nbsp;
+                            </small>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-body-secondary">
                                 <x-updated :date="$posts->updated_at">
                                     Updated
                                 </x-updated>
@@ -53,7 +56,7 @@
                                             {{ $comment->content }}
                                         </p>
                                         <footer class="blockquote-footer">
-                                            <x-updated :date="$comment->created_at">
+                                            <x-updated :date="$comment->created_at" :name="$comment->user->name">
                                                 Added
                                             </x-updated>
                                         </footer>

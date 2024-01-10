@@ -59,6 +59,16 @@ class User extends Authenticatable
         return $this->hasMany(BlogPost::class);
     }
 
+    /**
+     * The function returns a collection of comments associated with a specific model.
+     *
+     * @return HasMany a HasMany relationship.
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function scopeWithMostBlogPosts(EloquentBuilder $query): EloquentBuilder
     {
         return $query->withCount('blogPosts')->orderBy('blog_posts_count', 'desc');

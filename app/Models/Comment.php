@@ -18,6 +18,11 @@ class Comment extends Model
         return $this->belongsTo(BlogPost::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function scopeLatest(EloquentBuilder $query): EloquentBuilder
     {
         return $query->orderBy(static::CREATED_AT, 'desc');
