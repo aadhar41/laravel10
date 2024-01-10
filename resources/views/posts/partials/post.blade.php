@@ -13,6 +13,9 @@
                     </x-badge>
                 @endif
             </p>
+            <div class="col-12 text-truncate my-1">
+                {{ $post->content }}
+            </div>
 
             @if ($post->trashed())
                 </del>

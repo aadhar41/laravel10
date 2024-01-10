@@ -25,6 +25,7 @@
                                 <x-updated :date="$posts->updated_at">
                                     Updated
                                 </x-updated>
+                                <p class="my-1 text-bold">Currently read by {{ $counter }} peoples.</p>
                             </small>
                         </div>
                     </div>
