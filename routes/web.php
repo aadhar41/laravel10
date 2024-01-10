@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -25,6 +26,7 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/secret', [App\Http\Controllers\HomeController::class, 'secret'])->name('secret')->middleware('can:home.secret');
 
 Route::resource('posts', PostsController::class);
+Route::resource('posts.comments', PostCommentController::class)->only(['store']);
 
 Route::get('/posts/tag/{tag}', [App\Http\Controllers\PostTagController::class, 'index'])->name('posts.tags.index');
 
