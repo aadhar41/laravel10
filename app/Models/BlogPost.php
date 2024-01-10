@@ -133,6 +133,7 @@ class BlogPost extends Model
 
         static::deleting(function (BlogPost $blogPost) {
             $blogPost->comments()->delete();
+            Cache::tags(['blog-post'])->forget("blog-post-{$blogPost->id}");
         });
 
         static::restoring(function (BlogPost $blogPost) {
