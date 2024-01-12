@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Scopes\DeletedAdminScope;
+use App\Traits\Taggable;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,8 +21,7 @@ use Illuminate\Support\Facades\Cache;
 
 class BlogPost extends Model
 {
-    use SoftDeletes;
-    use HasFactory;
+    use HasFactory, SoftDeletes, Taggable;
 
     /**
      * The table associated with the model.
@@ -65,13 +65,6 @@ class BlogPost extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-
-    public function tags(): MorphToMany
-    {
-        return $this->morphToMany(Tag::class, 'taggable')->withTimestamps();
-    }
-
 
     public function image(): MorphOne
     {

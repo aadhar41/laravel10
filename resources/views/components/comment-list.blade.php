@@ -3,6 +3,13 @@
         <p class="mb-3">
             {{ $comment->content }}
         </p>
+        <p>
+            @isset($comment->tags)
+                <strong class="d-inline-block mb-1 text-primary-emphasis">
+                    <x-tags :tags="$comment->tags"></x-tags>
+                </strong>
+            @endisset
+        </p>
         <footer class="blockquote-footer">
             @php
                 $userId = $comment->user->id;
