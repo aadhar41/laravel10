@@ -1,4 +1,4 @@
-<div class="row g-0 border rounded flex-md-row mb-4 mt-2 shadow-sm h-md-250 position-relative">
+<div class="row g-0 border rounded flex-md-row mb-4 shadow-sm h-md-250 position-relative">
     <div class="col p-4 d-flex flex-column position-static">
 
         <h3 class="mb-0">

@@ -11,15 +11,24 @@ class Tag extends Model
 {
     use HasFactory;
 
+
     /**
-     * The function returns a many-to-many relationship between the current model and the BlogPost
-     * model in PHP.
-     *
-     * @return Object BelongsToMany a BelongsToMany relationship between the current model and the BlogPost
+     * The function returns a collection of blog posts that are associated with a specific taggable
      * model.
+     *
+     * @return a morphedByMany relationship with the BlogPost model. This means that the current model
+     * has a many-to-many relationship with the BlogPost model, using a polymorphic relationship. The
+     * relationship is defined by the 'taggable' morphable type and the 'tagged' morphable alias. The
+     * relationship also includes timestamps.
      */
-    public function blogPosts(): BelongsToMany
+    public function blogPosts()
     {
-        return $this->belongsToMany(BlogPost::class)->withTimestamps();
+        return $this->morphedByMany(BlogPost::class, 'taggable')->withTimestamps()->as('tagged');
+    }
+
+
+    public function comments()
+    {
+        return $this->morphedByMany(Comment::class, 'taggable')->withTimestamps()->as('tagged');
     }
 }
