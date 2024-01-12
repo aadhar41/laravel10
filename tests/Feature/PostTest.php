@@ -48,11 +48,14 @@ class PostTest extends TestCase
     public function test_see_one_blog_post_when_there_is_one_with_comments(): void
     {
         // Arrange
+        $user = $this->user();
         $post = $this->createDummyBlogPost();
 
         Comment::factory()->count(4)->create(
             [
-                'blog_post_id' => $post->id
+                'commentable_id' => $post->id,
+                'commentable_type' => BlogPost::class,
+                // 'user_id' => $user->id,
             ]
         );
 
