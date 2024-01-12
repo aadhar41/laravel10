@@ -102,25 +102,16 @@
                             <h4>Comments</h4>
                         </div>
 
+                        @php
+                            $route = route('posts.comments.store', ['post' => $posts->id]);
+                        @endphp
+
                         <p class="card-text">
-                            @include('comments._form')
+                            <x-comment-form :route="$route"></x-comment-form>
                         </p>
 
                         <p class="card-text">
-                            @forelse ($posts->comments as $comment)
-                                <blockquote class="blockquote">
-                                    <p class="mb-3">
-                                        {{ $comment->content }}
-                                    </p>
-                                    <footer class="blockquote-footer">
-                                        <x-updated :date="$comment->created_at" :name="$comment->user->name">
-                                            Added
-                                        </x-updated>
-                                    </footer>
-                                </blockquote>
-                            @empty
-                                <p>No Comments Yet!</p>
-                            @endforelse
+                            <x-comment-list :comments="$posts->comments"></x-comment-form>
                         </p>
                     </div>
                 </div>

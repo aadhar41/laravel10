@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -47,11 +48,11 @@ class BlogPost extends Model
     /**
      * The function returns a collection of comments associated with a specific model.
      *
-     * @return HasMany a HasMany relationship.
+     * @return MorphMany a MorphMany relationship.
      */
-    public function comments(): HasMany
+    public function comments(): MorphMany
     {
-        return $this->hasMany(Comment::class)->latest();
+        return $this->morphMany(Comment::class, 'commentable')->latest();
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 
@@ -16,9 +17,9 @@ class Comment extends Model
 
     protected $fillable = ['blog_post_id', 'content', 'user_id'];
 
-    public function blogPost(): BelongsTo
+    public function commentable(): MorphTo
     {
-        return $this->belongsTo(BlogPost::class);
+        return $this->morphTo();
     }
 
     public function user(): BelongsTo
@@ -37,8 +38,10 @@ class Comment extends Model
     protected static function booted(): void
     {
         static::creating(function (Comment $comment) {
-            Cache::tags(['blog-post'])->forget("blog-post-{$comment->blog_post_id}");
-            Cache::tags(['blog-post'])->forget("blog-post-most-commented");
+            if ($comment->commentable_type == BlogPost::class) {
+                Cache::tags(['blog-post'])->forget("blog-post-{$comment->commentable_id}");
+                Cache::tags(['blog-post'])->forget("blog-post-most-commented");
+            }
         });
         // static::addGlobalScope(new LatestScope);
     }

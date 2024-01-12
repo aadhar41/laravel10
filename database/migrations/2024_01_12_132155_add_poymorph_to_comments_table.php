@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->softDeletes();
+            $table->dropForeign(['blog_post_id']);
+            $table->dropColumn('blog_post_id');
+
+            $table->nullableMorphs('commentable');
         });
     }
 
@@ -22,7 +25,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('comments', function (Blueprint $table) {
-            $table->dropSoftDeletes();
+            $table->unsignedBigInteger('blog_post_id')->index()->nullable();
+            $table->foreign('blog_post_id')
+                ->references('id')
+                ->on('blog_posts')
+                ->onDelete('cascade');
+            $table->dropMorphs('commentable');
         });
     }
 };
