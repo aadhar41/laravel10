@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
@@ -18,9 +19,9 @@ class Image extends Model
      *
      * @return BelongsTo a BelongsTo relationship.
      */
-    public function blogPost(): BelongsTo
+    public function imageable(): MorphTo
     {
-        return $this->belongsTo(BlogPost::class);
+        return $this->morphTo(BlogPost::class);
     }
 
     public function url()
