@@ -20,7 +20,7 @@ return new class extends Migration
             } else {
                 $table->text('content');
             }
-            $table->unsignedBigInteger('blog_post_id')->index();
+            $table->unsignedBigInteger('blog_post_id')->index()->nullable();
             $table->foreign('blog_post_id')->references('id')->on('blog_posts');
         });
     }

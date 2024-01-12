@@ -9,6 +9,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -63,11 +64,11 @@ class User extends Authenticatable
     /**
      * The function returns a collection of comments associated with a specific model.
      *
-     * @return HasMany a HasMany relationship.
+     * @return MorphMany a MorphMany relationship.
      */
-    public function comments(): HasMany
+    public function commentsOn(): MorphMany
     {
-        return $this->hasMany(Comment::class);
+        return $this->morphMany(Comment::class, 'commentable')->latest();
     }
 
     public function image(): MorphOne
