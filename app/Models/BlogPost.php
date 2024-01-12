@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -65,15 +66,10 @@ class BlogPost extends Model
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * The function returns a many-to-many relationship between the current model and the Tag model in
-     * PHP.
-     *
-     * @return BelongsToMany a BelongsToMany relationship.
-     */
-    public function tags(): BelongsToMany
+
+    public function tags(): MorphToMany
     {
-        return $this->belongsToMany(Tag::class)->withTimestamps();
+        return $this->morphToMany(Tag::class, 'taggable')->withTimestamps();
     }
 
 
