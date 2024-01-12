@@ -24,26 +24,21 @@
             </div>
             <!-- /.card -->
 
-            <!-- About Me Box -->
-            <div class="card card-primary my-2">
-                <div class="card-header">
-                    <h5 class="card-title">Upload a diffrent photo</h5>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <p class="text-muted">
 
-                    </p>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
         </div>
         <!-- /.col -->
         <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
                     <h3>{{ $user->name }}</h3>
+
+                    @php
+                        $route = route('users.comments.store', ['user' => $user->id]);
+                    @endphp
+                    <x-comment-form :route="$route"></x-comment-form>
+
+                    <x-comment-list :comments="$user->commentsOn"></x-comment-form>
+
                 </div><!-- /.card-body -->
             </div>
             <!-- /.card -->
