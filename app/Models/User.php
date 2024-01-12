@@ -64,8 +64,13 @@ class User extends Authenticatable
     /**
      * The function returns a collection of comments associated with a specific model.
      *
-     * @return MorphMany a MorphMany relationship.
+     * @return HasMany a HasMany relationship.
      */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function commentsOn(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable')->latest();
