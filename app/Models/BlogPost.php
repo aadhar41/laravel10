@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -74,14 +75,10 @@ class BlogPost extends Model
         return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 
-    /**
-     * The function returns the latest comment associated with an image.
-     *
-     * @return HasOne a HasOne relationship instance.
-     */
-    public function image(): HasOne
+
+    public function image(): MorphOne
     {
-        return $this->hasOne(Image::class)->latest();
+        return $this->morphOne(Image::class, 'imageable');
     }
 
     /**
