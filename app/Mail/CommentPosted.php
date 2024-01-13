@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -55,6 +56,15 @@ class CommentPosted extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [
+            // Attachment::fromPath(
+            //     storage_path('app' . DIRECTORY_SEPARATOR . 'public') . DIRECTORY_SEPARATOR .  $this->comment->user->image->path,
+            // )->as('profile_picture.jpeg')
+            //     ->withMime('image/jpeg'),
+
+            Attachment::fromStorage($this->comment->user->image->path)
+                ->as('profile_picture.jpeg')
+                ->withMime('image/jpeg'),
+        ];
     }
 }
