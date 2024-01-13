@@ -33,7 +33,7 @@ class CommentPosted extends Mailable
     {
         return new Envelope(
             from: env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-            replyTo: ['address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'), 'name' => env('MAIL_FROM_NAME', 'Blog')],
+            // replyTo: ['address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'), 'name' => env('MAIL_FROM_NAME', 'Blog')],
             subject: "Comment was posted on your {$this->comment->commentable->title} blog post.",
         );
     }
