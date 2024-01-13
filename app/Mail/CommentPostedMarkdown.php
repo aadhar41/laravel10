@@ -54,9 +54,9 @@ class CommentPostedMarkdown extends Mailable
     public function attachments(): array
     {
         return [
-            Attachment::fromStorage($this->comment->user->image->path)
-                ->as('profile_picture.jpeg')
-                ->withMime('image/jpeg'),
+            // Attachment::fromStorage($this->comment->user->image->path)
+            //     ->as('profile_picture.jpeg')
+            //     ->withMime('image/jpeg'),
         ];
     }
 }

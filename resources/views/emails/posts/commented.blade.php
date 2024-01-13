@@ -1,42 +1,88 @@
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-    }
-</style>
+{{-- resources/views/emails/welcome.blade.php --}}
 
-<p>Hi, {{ $comment->commentable->user->name }}</p>
+<!DOCTYPE html>
+<html lang="en">
 
-<p>
-    Someone has commented on your blog post.
-    <a href="{{ route('posts.show', ['post' => $comment->commentable->id]) }}">
-        {{ $comment->commentable->title }}
-    </a>
-</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Your App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-<hr />
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 2px;
+            overflow: hidden;
+        }
 
-<p>
-    <img src="{{ $message->embed($comment->user->image->url()) }}" alt="Image" />
-    <a href="{{ route('users.show', ['user' => $comment->user->id]) }}">
-        {{ $comment->user->name }}
-    </a> said :
-</p>
+        .header {
+            background-color: #3498db;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
 
-<p>
-    "{{ $comment->content }}"
-</p>
+        .content {
+            padding: 20px;
+            line-height: 1.6;
+        }
 
-# {{ $title }}
+        .button {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
 
-$body
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+        }
+    </style>
+</head>
 
-@if (count($attachments) > 0)
-    ## Attachments
-    @foreach ($attachments as $attachment)
-        - [{{ $attachment['name'] }}]({{ $attachment['url'] }})
-    @endforeach
-@endif
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to Your App</h1>
+        </div>
+        <div class="content">
+            <p>Hi {{ $comment->commentable->user->name }},</p>
+            <p>Thank you for joining our community. We're excited to have you on board!</p>
+            <p>
+                {{ $comment->commentable->title }}
+                <br />
+                <a href="{{ route('posts.show', ['post' => $comment->commentable->id]) }}" class="button">
+                    View Post
+                </a>
+            </p>
+            <p>
+                <a href="{{ route('users.show', ['user' => $comment->user->id]) }}">
+                    {{ $comment->user->name }}
+                </a> said :
+            </p>
+            <p>"{{ $comment->content }}"</p>
 
-Best Regards,
+            Best Regards,<br />
+            {{ config('app.name') }}
 
-{{ config('app.name') }}
+        </div>
+        <div class="footer">
+            &copy; {{ date('Y') }} {{ config('app.name') }}
+        </div>
+    </div>
+</body>
+
+</html>
