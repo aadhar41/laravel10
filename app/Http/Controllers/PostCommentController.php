@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreComment;
 use App\Mail\CommentPosted;
+use App\Mail\CommentPostedMarkdown;
 use App\Models\BlogPost;
 use Illuminate\Support\Facades\Mail;
 
@@ -27,7 +28,7 @@ class PostCommentController extends Controller
         // return response()->json(['message' => 'Your comment has been added!'], 201);
 
         Mail::to($post->user->email)->send(
-            new CommentPosted($comment)
+            new CommentPostedMarkdown($comment)
         );
 
         // $request->session()->flash('status', 'The comment was added!');

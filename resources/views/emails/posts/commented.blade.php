@@ -25,3 +25,18 @@
 <p>
     "{{ $comment->content }}"
 </p>
+
+# {{ $title }}
+
+$body
+
+@if (count($attachments) > 0)
+    ## Attachments
+    @foreach ($attachments as $attachment)
+        - [{{ $attachment['name'] }}]({{ $attachment['url'] }})
+    @endforeach
+@endif
+
+Best Regards,
+
+{{ config('app.name') }}
