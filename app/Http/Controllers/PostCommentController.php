@@ -48,9 +48,9 @@ class PostCommentController extends Controller
         ThrottledMail::dispatch(
             new CommentPostedMarkdown($comment),
             $post->user
-        );
+        )->onQueue('low');
 
-        NotifyUsersPostWasCommented::dispatch($comment);
+        NotifyUsersPostWasCommented::dispatch($comment)->onQueue('high');
 
         // $request->session()->flash('status', 'The comment was added!');
         return redirect()->back()->withStatus('The comment was added!');
