@@ -14,6 +14,7 @@ use Illuminate\Queue\SerializesModels;
 class CommentPostedMarkdown extends Mailable
 {
     use Queueable, SerializesModels;
+
     public $comment;
 
     /**
