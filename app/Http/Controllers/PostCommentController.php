@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreComment;
 use App\Jobs\NotifyUsersPostWasCommented;
-use App\Mail\CommentPosted;
+use App\Jobs\ThrottledMail;
 use App\Mail\CommentPostedMarkdown;
 use App\Models\BlogPost;
-use Illuminate\Support\Facades\Mail;
 
 class PostCommentController extends Controller
 {
@@ -35,17 +34,23 @@ class PostCommentController extends Controller
         //     ->queue(new CommentPostedMarkdown($comment));
 
 
-        $when = now()->addMinutes(1);
-        Mail::to($post->user->email)->later(
-            $when,
-            new CommentPostedMarkdown($comment)
-        );
+        // $when = now()->addMinutes(1);
+        // Mail::to($post->user->email)->later(
+        //     $when,
+        //     new CommentPostedMarkdown($comment)
+        // );
 
-        NotifyUsersPostWasCommented::dispatch($comment);
 
         // Mail::to($post->user->email)->queue(
         //     new CommentPostedMarkdown($comment)
         // );
+
+        ThrottledMail::dispatch(
+            new CommentPostedMarkdown($comment),
+            $post->user
+        );
+
+        NotifyUsersPostWasCommented::dispatch($comment);
 
         // $request->session()->flash('status', 'The comment was added!');
         return redirect()->back()->withStatus('The comment was added!');
