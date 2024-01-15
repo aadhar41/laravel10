@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -93,5 +94,13 @@ class User extends Authenticatable
         }])
             ->has('blogPosts', '>=', 4)
             ->orderBy('blog_posts_count', 'desc');
+    }
+
+    public function scopeThatHasCommentedOnPost(EloquentBuilder $query, BlogPost $post)
+    {
+        return $query->whereHas('comments', function ($query) use ($post) {
+            $query->where('commentable_id', $post->getKey())
+                ->where('commentable_type', get_class($post));
+        });
     }
 }

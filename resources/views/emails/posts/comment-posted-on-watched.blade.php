@@ -1,6 +1,6 @@
 <x-mail::message>
-# Comment was posted on your blog post.
-Hi, {{ $comment->commentable->user->name }}
+# Comment was posted on post you're watching.
+Hi, {{ $user->name }}
 <x-mail::panel>
 {{ Str::of($comment->content)->trim(); }}
 </x-mail::panel>

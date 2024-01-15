@@ -3,27 +3,28 @@
 namespace App\Mail;
 
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class CommentPostedMarkdown extends Mailable
+class CommentPostedOnPostWatched extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $comment;
+    public $user;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(
-        Comment $comment
-    ) {
+    public function __construct(Comment $comment, User $user)
+    {
         $this->comment = $comment;
+        $this->user = $user;
     }
 
     /**
@@ -32,8 +33,7 @@ class CommentPostedMarkdown extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-            subject: "Comment was posted on your {$this->comment->commentable->title} blog post.",
+            subject: 'Comment Posted On Post Watched',
         );
     }
 
@@ -43,7 +43,7 @@ class CommentPostedMarkdown extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.posts.commented-markdown',
+            markdown: 'emails.posts.comment-posted-on-watched',
         );
     }
 
@@ -54,10 +54,6 @@ class CommentPostedMarkdown extends Mailable
      */
     public function attachments(): array
     {
-        return [
-            // Attachment::fromStorage($this->comment->user->image->path)
-            //     ->as('profile_picture.jpeg')
-            //     ->withMime('image/jpeg'),
-        ];
+        return [];
     }
 }
