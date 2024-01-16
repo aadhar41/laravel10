@@ -103,4 +103,12 @@ class User extends Authenticatable
                 ->where('commentable_type', get_class($post));
         });
     }
+
+
+    public function scopeThatIsAnAdmin(EloquentBuilder $query)
+    {
+        // This is just for testing purposes. In a real application you might want to add some kind
+        // of authorization check here.
+        return $query->where('is_admin', true);
+    }
 }
