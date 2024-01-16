@@ -9,7 +9,7 @@
                 {{ $post->title }}
                 @if (now()->diffInMinutes($post->created_at) < 2000)
                     <x-badge type='warning' :show="now()->diffInMinutes($post->created_at) < 20">
-                        New !
+                        {{ __('New') }} !
                     </x-badge>
                 @endif
             </p>
@@ -26,15 +26,11 @@
         </x-tags>
         <div class="mb-1 text-body-secondary">
             <x-updated :name="$post->user->name" :date="$post->created_at" :userId="$post->user->id">
-                Added
+                {{ __('Added') }}
             </x-updated>
         </div>
         <div class="mb-1 text-body-secondary">
-            @if ($post->comments_count)
-                {{ $post->comments_count }} comments
-            @else
-                No comments yet!
-            @endif
+            {{ trans_choice('messages.comments', $post->comments_count) }}
         </div>
 
         <div class="btn-group col-lg-2 my-2" role="group" aria-label="Button group name">
@@ -42,7 +38,7 @@
                 @can('update', $post)
                     <a name="" id="" class="btn btn-primary"
                         href="{{ route('posts.edit', ['post' => $post->id]) }}" role="button"><i
-                            class="fas fa-edit"></i>Edit</a>
+                            class="fas fa-edit"></i>{{ __('Edit') }}</a>
                 @endcan
             @endauth
 
@@ -54,7 +50,7 @@
                             method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete!</button>
+                            <button type="submit" class="btn btn-danger">{{ __('Delete') }}!</button>
                         </form>
                     @endcan
                 @endif
@@ -64,7 +60,7 @@
 
 
         <a href="{{ route('posts.show', ['post' => $post->id]) }}" class="icon-link gap-1 icon-link-hover mt-2">
-            Continue reading
+            {{ __('Continue reading') }}
             <svg class="bi">
                 <use xlink:href="#chevron-right" />
             </svg>

@@ -130,18 +130,18 @@
             <header class="border-bottom lh-1 py-3">
                 <div class="row flex-nowrap justify-content-between align-items-center">
                     <div class="col-4 pt-1">
-                        <a class="link-secondary" href="javascript:void(0)">Subscribe</a>
+                        <a class="link-secondary" href="javascript:void(0)">{{ __('Subscribe') }}</a>
                     </div>
                     <div class="col-4 text-center">
                         <a class="blog-header-logo text-body-emphasis text-decoration-none"
-                            href="{{ route('home') }}">Blog</a>
+                            href="{{ route('home') }}">{{ __('Blog') }}</a>
                     </div>
                     <div class="col-4 d-flex justify-content-end align-items-center">
                         <a class="link-secondary" href="javascript:void(0)" aria-label="Search">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24">
-                                <title>Search</title>
+                                <title>{{ __('Search') }}</title>
                                 <circle cx="10.5" cy="10.5" r="7.5" />
                                 <path d="M21 21l-5.2-5.2" />
                             </svg>
@@ -202,9 +202,10 @@
         </main>
 
         <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
-            <p>Blog for <a href="avascript:void(0)">Blog</a> by <a href="javascript:void(0)">@aadhar41</a>.</p>
+            <p>{{ __('Blog for') }} <a href="avascript:void(0)">{{ __('Blog') }}</a> {{ __('by') }} <a
+                    href="javascript:void(0)">@aadhar41</a>.</p>
             <p class="mb-0">
-                <a href="javascript:void(0)">Back to top</a>
+                <a href="javascript:void(0)">{{ __('Back to top') }}</a>
             </p>
         </footer>
 
