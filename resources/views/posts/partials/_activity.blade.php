@@ -1,11 +1,11 @@
 <div class="position-sticky" style="top: 2rem;">
     {{-- Most Active Last Month --}}
     <x-card title='Most Active Last Month' subtitle='Users with most posts written last month.' :items="collect($mostActiveLastMonth)->pluck('name')">
-        New !
+        {{ __('New') }} !
     </x-card>
 
     {{-- Most Commented --}}
-    <x-card title='Most Commented' subtitle='What people are currently taking about...' :items="[]">
+    <x-card title='Most Commented' subtitle='What people are currently talking about.' :items="[]">
         @foreach ($mostCommented as $post)
             <li>
                 <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
@@ -21,7 +21,7 @@
 
     {{-- Most Active --}}
     <x-card title='Most Active' subtitle='Users with most posts written.' :items="collect($mostActive)->pluck('name')">
-        New !
+        {{ __('New') }} !
     </x-card>
 
     <div class="p-4">

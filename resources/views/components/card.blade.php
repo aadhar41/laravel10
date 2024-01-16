@@ -1,6 +1,6 @@
 <div class="mb-3 h-100 p-4 bg-body-tertiary border rounded-2">
-    <h4 class="mb-0"><strong>{{ $title }}</strong></h4>
-    <small>{{ $subtitle }}</small>
+    <h4 class="mb-0"><strong>{{ __($title) }}</strong></h4>
+    <small>{{ __($subtitle) }}</small>
     <ol class="list-unstyled mb-0 mt-2">
         @if (is_a($items, 'Illuminate\Support\Collection'))
             @foreach ($items as $item)

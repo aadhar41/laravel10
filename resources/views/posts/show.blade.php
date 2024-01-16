@@ -47,7 +47,7 @@
                     </div>
                     <div class="mb-1 text-body-secondary">
                         <small class="text-body-secondary">
-                            <p class="my-1 text-bold">Currently read by {{ $counter }} peoples.</p>
+                            <p class="my-1 text-bold">{{ trans_choice('messages.people.reading', $counter) }}</p>
                         </small>
                     </div>
                     <p class="card-text mb-auto">{{ $posts->content }}</p>
