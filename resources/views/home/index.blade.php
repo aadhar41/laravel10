@@ -5,6 +5,8 @@
 
     <div class="jumbotron">
         <h1 class="display-3">{{ __('messages.welcome') }}</h1>
+        <h2 class="display-3">Using JSON {{ __('Welcome to my blog') }}</h2>
+        <p class="display-2">Using name : {{ __('Hello :name', ['name' => 'Aadhar']) }}</p>
         <p>{{ __('messages.example_with_value', ['name' => 'Aadhar']) }}</p>
         <p>{{ trans_choice('messages.plural', 0, ['a' => 1]) }}</p>
         <p>{{ trans_choice('messages.plural', 1, ['a' => 1]) }}</p>
