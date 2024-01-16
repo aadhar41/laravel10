@@ -74,7 +74,13 @@ class UserController extends Controller
             }
         }
 
-        return redirect()->back()->withStatus('Profile image was updated.');
+        if ($request->get('name')) {
+            $user->name = $request->get('name');
+        }
+        $user->locale = $request->get('locale');
+        $user->save();
+
+        return redirect()->back()->withStatus('Profile was updated.');
     }
 
     /**

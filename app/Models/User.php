@@ -20,6 +20,12 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public const LOCALE = [
+        'en' => 'English',
+        'es' => 'Espanol',
+        'de' => 'Deutsche',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

@@ -132,11 +132,11 @@
                     <div class="col-4 pt-1">
                         <a class="link-secondary" href="javascript:void(0)">{{ __('Subscribe') }}</a>
                     </div>
-                    <div class="col-4 text-center">
+                    <div class="col-2 text-center">
                         <a class="blog-header-logo text-body-emphasis text-decoration-none"
                             href="{{ route('home') }}">{{ __('Blog') }}</a>
                     </div>
-                    <div class="col-4 d-flex justify-content-end align-items-center">
+                    <div class="col-6 d-flex justify-content-end align-items-center">
                         <a class="link-secondary" href="javascript:void(0)" aria-label="Search">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -156,12 +156,20 @@
                                     href="{{ route('login') }}">{{ __('Login') }}</a>
                             @endif
                         @else
-                            <a class="btn btn-sm btn-outline-secondary" href="{{ route('logout') }}"
+                            <a href="{{ route('users.show', ['user' => Auth::user()->id]) }}"
+                                class="btn btn-sm btn-outline-secondary mx-1">
+                                {{ __('Profile') }}
+                            </a>
+                            <a href="{{ route('users.edit', ['user' => Auth::user()->id]) }}"
+                                class="btn btn-sm btn-outline-secondary mx-1">
+                                {{ __('Edit Profile') }}
+                            </a>
+                            <a class="btn btn-sm btn-outline-secondary mx-1 px-3" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
-                            <span class="btn btn-sm btn-outline-secondary mx-2 px-3 bg-dark text-white">
+                            <span class="btn btn-sm btn-outline-secondary mx-1 px-3 bg-dark text-white">
                                 @auth
                                     {{ auth()->user()->name }}
                                 @endauth

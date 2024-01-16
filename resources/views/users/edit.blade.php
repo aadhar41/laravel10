@@ -35,7 +35,7 @@
                     <div class="card-body">
                         <p class="text-muted">
                         <div class="mb-3">
-                            <label for="" class="form-label">Upload a diffrent avatar</label>
+                            <label for="" class="form-label">{{ __('Upload a diffrent avatar') }}</label>
                             <input type="file" class="form-control @error('avatar') is-invalid @enderror" name="avatar"
                                 id="avatar" placeholder="{{ __('avatar') }}" aria-describedby="fileHelpId" />
                             <div id="fileHelpId" class="form-text">The content field must be a file of type: jpg, jpeg, png,
@@ -56,10 +56,11 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-body">
+                        {{-- Name --}}
                         <div class="form-floating mb-3">
                             <input type="text" name="name" id="name"
                                 class="form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}"
-                                value="{{ old('name', optional($post ?? null)->name) }}" autocomplete="off" />
+                                value="{{ old('name', optional($user ?? null)->name) }}" autocomplete="off" />
                             <label for="name">{{ __('Name') }}</label>
                             <small id="helpId">
                                 @error('name')
@@ -67,6 +68,25 @@
                                 @enderror
                             </small>
                         </div>
+
+                        <div class="mb-3">
+                            <label for="locale" class="form-label">{{ __('Language') }}</label>
+                            <select class="form-select form-control form-select-lg" name="locale" id="locale">
+                                <option selected>{{ __('Select one') }}</option>
+                                @foreach (App\Models\User::LOCALE as $locale => $label)
+                                    <option value="{{ $locale }}" {{ $user->locale != $locale ?: 'selected' }}>
+                                        {{ __($label) }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <small id="helpId">
+                                @error('locale')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </small>
+                        </div>
+
+
 
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary btn-block">{{ __('Save Changes') }}</button>
