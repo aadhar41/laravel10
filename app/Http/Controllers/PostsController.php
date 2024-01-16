@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BlogPostPosted;
 use App\Http\Requests\StorePost;
 use App\Models\BlogPost;
 use App\Models\Image;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
@@ -59,6 +56,8 @@ class PostsController extends Controller
                 ]),
             );
         }
+
+        event(new BlogPostPosted($post));
 
         $request->session()->flash('status', 'The blog post created!');
         return redirect()->route('posts.show', ['post' => $post->id]);
