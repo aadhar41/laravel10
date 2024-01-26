@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUser;
 use App\Models\Image;
 use App\Models\User;
+use App\Services\Counter;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -44,7 +45,15 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', ['user' => $user]);
+        $counter = resolve(Counter::class);
+
+        return view(
+            'users.show',
+            [
+                'user' => $user,
+                'counter' => $counter->increment("user-{$user->id}")
+            ]
+        );
     }
 
     /**
