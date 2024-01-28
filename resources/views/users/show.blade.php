@@ -32,6 +32,10 @@
                 <div class="card-body">
                     <h3>{{ $user->name }}</h3>
 
+                    <p>
+                        Currently viewed by {{ $counter }} other users.
+                    </p>
+
                     @php
                         $route = route('users.comments.store', ['user' => $user->id]);
                     @endphp
