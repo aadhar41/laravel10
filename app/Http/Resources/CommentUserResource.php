@@ -4,9 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\CommentUserResource;
 
-class CommentResource extends JsonResource
+class CommentUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,10 +16,7 @@ class CommentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'content' => $this->content,
-            'created_at' => (string) $this->created_at,
-            'updated_at' => (string) $this->updated_at,
-            'user' => new CommentUserResource($this->user),
+            'name' => $this->name,
         ];
     }
 }
