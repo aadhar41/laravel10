@@ -12,10 +12,13 @@ class PostCommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(BlogPost $post)
+    public function index(BlogPost $post, Request $request)
     {
+        $perPage = $request->input('per_page') ?? 15;
         return CommentResource::collection(
-            $post->comments()->with('user')->paginate(2)
+            $post->comments()->with('user')->paginate($perPage)->appends([
+                'per_page' => $perPage
+            ])
         );
     }
 
