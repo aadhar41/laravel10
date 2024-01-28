@@ -17,6 +17,18 @@ class Comment extends Model
 
     protected $fillable = ['blog_post_id', 'content', 'user_id'];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'deleted_at',
+        'commentable_type',
+        'commentable_id',
+        'user_id',
+    ];
+
     public function commentable(): MorphTo
     {
         return $this->morphTo();

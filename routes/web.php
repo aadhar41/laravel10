@@ -32,7 +32,7 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/secret', [App\Http\Controllers\HomeController::class, 'secret'])->name('secret')->middleware('can:home.secret');
 
 Route::resource('posts', PostsController::class);
-Route::resource('posts.comments', PostCommentController::class)->only(['store']);
+Route::resource('posts.comments', PostCommentController::class)->only(['index', 'store']);
 Route::resource('users', UserController::class)->only(['show', 'edit', 'update']);
 Route::resource('users.comments', UserCommentController::class)->only(['store']);
 
