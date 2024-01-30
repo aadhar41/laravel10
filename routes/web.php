@@ -45,3 +45,9 @@ Route::get('mailable', function () {
     $comment = Comment::find(1);
     return new CommentPosted($comment);
 });
+
+Route::fallback(function () {
+    return response()->json([
+        'message' => 'Not Found!',
+    ], 404);
+});
