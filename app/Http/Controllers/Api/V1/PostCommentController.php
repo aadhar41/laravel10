@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreComment;
 use App\Http\Resources\CommentResource;
 use App\Models\BlogPost;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PostCommentController extends Controller
 {
@@ -48,24 +50,30 @@ class PostCommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(BlogPost $post, Comment $comment)
     {
-        //
+        return new CommentResource($comment);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BlogPost $post, Comment $comment, StoreComment $request)
     {
-        //
+        $comment->content = $request->input('content');
+        $comment->save();
+        return new CommentResource($comment);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(BlogPost $post, Comment $comment)
     {
-        //
+        $comment->delete();
+        // Returning a response with a 204 status code indicates that the request succeeded
+        // Returning a response with no content is not supported by all clients. Therefore we use
+        // `respond` method which always returns an instance of Illuminate\Http\Response
+        return response()->noContent();
     }
 }
