@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Events\CommentPosted;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreComment;
 use App\Http\Resources\CommentResource;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 
 class PostCommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only(['store']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -16,18 +23,26 @@ class PostCommentController extends Controller
     {
         $perPage = $request->input('per_page') ?? 15;
         return CommentResource::collection(
-            $post->comments()->with('user')->paginate($perPage)->appends([
-                'per_page' => $perPage
-            ])
+            $post->comments()->with('user')->paginate($perPage)->appends(
+                [
+                    'per_page' => $perPage
+                ]
+            )
         );
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BlogPost $post, StoreComment $request)
     {
-        //
+        $comment = $post->comments()->create([
+            'content' => $request->input('content'),
+            'user_id' => $request->user()->id,
+        ]);
+
+        event(new CommentPosted($comment));
+        return new CommentResource($comment);
     }
 
     /**
