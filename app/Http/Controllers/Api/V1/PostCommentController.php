@@ -15,7 +15,7 @@ class PostCommentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->only(['store']);
+        $this->middleware('auth:sanctum')->only(['store', 'show', 'update', 'destroy']);
     }
 
     /**
@@ -38,6 +38,8 @@ class PostCommentController extends Controller
      */
     public function store(BlogPost $post, StoreComment $request)
     {
+        $this->authorize(Comment::class);
+
         $comment = $post->comments()->create([
             'content' => $request->input('content'),
             'user_id' => $request->user()->id,
@@ -52,6 +54,7 @@ class PostCommentController extends Controller
      */
     public function show(BlogPost $post, Comment $comment)
     {
+        $this->authorize($comment);
         return new CommentResource($comment);
     }
 
@@ -60,6 +63,7 @@ class PostCommentController extends Controller
      */
     public function update(BlogPost $post, Comment $comment, StoreComment $request)
     {
+        $this->authorize($comment);
         $comment->content = $request->input('content');
         $comment->save();
         return new CommentResource($comment);
@@ -70,6 +74,7 @@ class PostCommentController extends Controller
      */
     public function destroy(BlogPost $post, Comment $comment)
     {
+        $this->authorize($comment);
         $comment->delete();
         // Returning a response with a 204 status code indicates that the request succeeded
         // Returning a response with no content is not supported by all clients. Therefore we use

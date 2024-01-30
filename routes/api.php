@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\PostCommentController;
 use App\Http\Controllers\Api\V1\UserAuthController;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::fallback(function () {
     return response()->json([
         'message' => 'Not Found!',
-    ], 404);
+    ], Response::HTTP_NOT_FOUND);
 })->name('api.fallback');
 
 
