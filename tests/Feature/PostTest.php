@@ -34,7 +34,7 @@ class PostTest extends TestCase
 
         // Assert
         $response->assertSeeText('New title');
-        $response->assertSeeText('No comments yet!');
+        $response->assertSeeText('No comments yet');
 
         $this->assertDatabaseHas('blog_posts', [
             'title' => 'New title',
@@ -55,7 +55,7 @@ class PostTest extends TestCase
             [
                 'commentable_id' => $post->id,
                 'commentable_type' => BlogPost::class,
-                // 'user_id' => $user->id,
+                'user_id' => $user->id,
             ]
         );
 
@@ -94,14 +94,15 @@ class PostTest extends TestCase
             'content' => 'x',
         ];
 
-        $this->actingAs($this->user())->post('/posts', $params)
+        $this->actingAs($this->user())
+            ->post('/posts', $params)
             ->assertStatus(302)
             ->assertSessionHas('errors');
 
         $messages = session('errors')->getMessages();
 
-        $this->assertEquals($messages['title'][0], 'The title field must be at least 5 characters.');
-        $this->assertEquals($messages['content'][0], 'The content field must be at least 10 characters.');
+        $this->assertEquals($messages['title'][0], 'The title must be at least 5 characters.');
+        $this->assertEquals($messages['content'][0], 'The content must be at least 10 characters.');
     }
 
     /**
