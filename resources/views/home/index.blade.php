@@ -18,7 +18,10 @@
             sequi sunt recusandae eveniet
             perspiciatis, perferendis corporis eius, commodi velit architecto accusamus illum tenetur
             praesentium. Optio
-            obcaecati autem distinctio molestiae quas!</p>
+            obcaecati autem distinctio molestiae quas!
+            Home Page
+            This is the content of the home page.
+        </p>
         <hr class="my-2">
         <p>More info</p>
         <p class="lead">
