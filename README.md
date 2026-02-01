@@ -3,7 +3,7 @@
 ![Laravel 10](https://img.shields.io/badge/Laravel-10.0-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-8.1-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Build Status](https://img.shields.io/github/actions/workflow/status/yourusername/laravel10-blog/run-tests.yml?branch=main)
+![Build Status](https://img.shields.io/github/actions/workflow/status/aadhar41/laravel10-blog/run-tests.yml?branch=main)
 ![Code Style](https://img.shields.io/badge/code_style-PSR-12-ff69b4.svg)
 
 ## **🚀 Overview**
@@ -92,7 +92,7 @@ Before you begin, ensure you have the following installed on your system:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/laravel10-blog.git
+   git clone https://github.com/aadhar41/laravel10-blog.git
    cd laravel10-blog
    ```
 
@@ -321,17 +321,23 @@ We welcome contributions from the community! Here's how you can help:
 
 ## **📝 License**
 
-This project is open-sourced under the **MIT License**.
+Distributed under the MIT License. See `LICENSE` for more information.
 
-See the [LICENSE](LICENSE) file for more information.
+---
 
-## **👥 Authors & Contributors**
+## **👤 Author**
 
-**Maintainer:**
-[Your Name](https://github.com/yourusername) - Initial work
+**Aadhar Gaur**
 
-**Contributors:**
-[List of contributors](https://github.com/yourusername/laravel10-blog/graphs/contributors)
+- **GitHub**: [@aadhar41](https://github.com/aadhar41)
+- **LinkedIn**: [aadhar-gaur-php](https://linkedin.com/in/aadhar-gaur-php)
+
+---
+
+## **🙏 Acknowledgments**
+
+- Built with ❤️ by Aadhar Gaur.
+- Powered by [Laravel](https://laravel.com/)
 
 ## **🐛 Issues & Support**
 
@@ -378,8 +384,8 @@ If you encounter any problems or have feature requests:
 
 ### **Known Issues**
 
-- [#123](https://github.com/yourusername/laravel10-blog/issues/123) - Mobile responsiveness in comment section
-- [#456](https://github.com/yourusername/laravel10-blog/issues/456) - Tag cloud implementation
+- [#123](https://github.com/aadhar41/laravel10-blog/issues/123) - Mobile responsiveness in comment section
+- [#456](https://github.com/aadhar41/laravel10-blog/issues/456) - Tag cloud implementation
 
 ## **🎉 Getting Started Examples**
 
